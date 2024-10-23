@@ -1,0 +1,25 @@
+cargo-features = ["edition2024"]
+
+[package]
+name = "tg"
+edition = "2024"
+
+[lib]
+path = "lib.rs"
+
+[dependencies]
+# frameworks
+serde = { version = "1", features = ["derive"] }
+tokio = { version = "1", default-features = false, features = ["rt-multi-thread", "signal", "macros"] }
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "multipart", "json", "stream"] }
+
+# utils
+serde_json = { version = "1" }
+mime = { version = "0.3" }
+
+# extensions
+bytes = { version = "1.7" }
+derive_more = { version = "1", features = ["std", "from"], default-features = false }
+tokio-util = { version = "0.7", default-features = false, features = ["codec"]}
+futures-util = { version = "0.3" }
+
