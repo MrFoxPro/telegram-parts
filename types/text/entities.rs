@@ -16,7 +16,7 @@ use crate::types::User;
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
 #[serde(into = "Vec<TextEntity>", try_from = "Vec<RawTextEntity>")]
 pub struct TextEntities {
-    items: Vec<TextEntity>,
+    pub items: Vec<TextEntity>,
 }
 
 impl TextEntities {
