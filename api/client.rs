@@ -1,4 +1,4 @@
-use std::{error::Error, fmt, time::Duration};
+use std::{error::Error, fmt, future::Future, time::Duration};
 
 use bytes::Bytes;
 use futures_util::stream::Stream;
