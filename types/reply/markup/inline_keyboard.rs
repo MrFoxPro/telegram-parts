@@ -14,12 +14,11 @@ pub struct InlineKeyboardMarkup {
 }
 
 impl InlineKeyboardMarkup {
-    /// Adds a row to the markup.
-    ///
-    /// # Arguments
-    ///
-    /// * `value` - The row to add.
-    pub fn add_row<T>(mut self, value: T) -> Self
+    pub fn add_row<T: IntoIterator<Item = InlineKeyboardButton>>(&mut self, value: T) {
+        self.inline_keyboard.push(value.into_iter().collect());
+    }
+
+    pub fn with_row<T>(mut self, value: T) -> Self
     where
         T: IntoIterator<Item = InlineKeyboardButton>,
     {
