@@ -1,6 +1,5 @@
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
-
 use crate::types::{Integer, Text, TextEntities, True};
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 #[derive(Deserialize, Serialize)]
 pub(super) struct RawDataBoostAdded {
@@ -12,14 +11,17 @@ impl RawDataBoostAdded {
     where
         D: Deserializer<'de>,
     {
-        RawDataBoostAdded::deserialize(deserializer).map(|RawDataBoostAdded { boost_count }| boost_count)
+        RawDataBoostAdded::deserialize(deserializer)
+            .map(|RawDataBoostAdded { boost_count }| boost_count)
     }
 
     pub(super) fn serialize_value<S>(value: &Integer, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: Serializer,
     {
-        let value = RawDataBoostAdded { boost_count: *value };
+        let value = RawDataBoostAdded {
+            boost_count: *value,
+        };
         value.serialize(serializer)
     }
 }

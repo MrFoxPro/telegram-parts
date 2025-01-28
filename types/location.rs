@@ -5,8 +5,6 @@ use crate::{
     types::{ChatId, Float, Integer, Message, ReplyMarkup, ReplyParameters},
 };
 
-
-
 /// Represents a point on a map.
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
 pub struct Location {

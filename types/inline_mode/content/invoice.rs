@@ -1,9 +1,6 @@
+use crate::types::{Integer, LabeledPrice};
 use serde::{Deserialize, Serialize};
 use serde_json::Error as JsonError;
-
-use crate::types::{Integer, LabeledPrice};
-
-
 
 /// Represents an invoice message to be sent as the result of an inline query.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

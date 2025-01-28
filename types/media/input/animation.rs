@@ -1,8 +1,5 @@
-use serde::{Deserialize, Serialize};
-
 use crate::types::{Integer, ParseMode, TextEntities, TextEntity};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
 #[derive(Clone, Default, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

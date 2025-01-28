@@ -1,8 +1,5 @@
-use serde::{Deserialize, Serialize};
-
 use crate::types::{Integer, ParseMode, TextEntities, TextEntity};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a video to be sent.
 #[derive(Clone, Default, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

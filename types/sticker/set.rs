@@ -1,21 +1,11 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Form, Method, Payload},
     types::{
-        InputFile,
-        InputSticker,
-        InputStickerError,
-        InputStickers,
-        Integer,
-        PhotoSize,
-        Sticker,
-        StickerFormat,
-        StickerType,
+        InputFile, InputSticker, InputStickerError, InputStickers, Integer, PhotoSize, Sticker,
+        StickerFormat, StickerType,
     },
 };
-
-
 
 /// Represents a sticker set.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -87,7 +77,11 @@ impl AddStickerToSet {
     /// * `user_id` - User identifier of sticker set owner.
     /// * `name` - Sticker set name.
     /// * `sticker` - Sticker file.
-    pub fn new<T>(user_id: Integer, name: T, sticker: InputSticker) -> Result<Self, InputStickerError>
+    pub fn new<T>(
+        user_id: Integer,
+        name: T,
+        sticker: InputSticker,
+    ) -> Result<Self, InputStickerError>
     where
         T: Into<String>,
     {
@@ -128,7 +122,12 @@ impl CreateNewStickerSet {
     ///            1-64 characters.
     /// * `title` - Sticker set title; 1-64 characters.
     /// * `stickers` - A list of 1-50 initial stickers to be added to the sticker set.
-    pub fn new<A, B>(user_id: Integer, name: A, title: B, stickers: InputStickers) -> Result<Self, InputStickerError>
+    pub fn new<A, B>(
+        user_id: Integer,
+        name: A,
+        title: B,
+        stickers: InputStickers,
+    ) -> Result<Self, InputStickerError>
     where
         A: Into<String>,
         B: Into<String>,

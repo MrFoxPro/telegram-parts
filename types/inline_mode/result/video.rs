@@ -1,14 +1,12 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
-use crate::types::{InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity};
-
-
+use crate::types::{
+    InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity,
+};
+use serde::{Deserialize, Serialize};
 
 /// Represents a link to a page containing an embedded video player or a video file.
 ///
@@ -368,7 +366,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultVideo {
             parse_mode: value.data.parse_mode,
             reply_markup: value.data.reply_markup,
             show_caption_above_media: value.data.show_caption_above_media,
-            thumbnail_url: value.data.thumbnail_url.ok_or(MissingField("thumbnail_url"))?,
+            thumbnail_url: value
+                .data
+                .thumbnail_url
+                .ok_or(MissingField("thumbnail_url"))?,
             title: value.data.title.ok_or(MissingField("title"))?,
             video_duration: value.data.video_duration,
             video_height: value.data.video_height,
@@ -418,7 +419,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultCachedVideo {
             reply_markup: value.data.reply_markup,
             show_caption_above_media: value.data.show_caption_above_media,
             title: value.data.title.ok_or(MissingField("title"))?,
-            video_file_id: value.data.video_file_id.ok_or(MissingField("video_file_id"))?,
+            video_file_id: value
+                .data
+                .video_file_id
+                .ok_or(MissingField("video_file_id"))?,
         })
     }
 }

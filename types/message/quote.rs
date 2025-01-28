@@ -1,8 +1,5 @@
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
-
 use crate::types::{Integer, Text, TextEntities};
-
-
 
 /// Contains information about the quoted part of a message that is replied to by the given message.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -53,9 +50,9 @@ impl TextQuote {
 
 #[derive(Deserialize, Serialize)]
 struct RawText {
-    text: String,
+    pub text: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    entities: Option<TextEntities>,
+    pub entities: Option<TextEntities>,
 }
 
 impl RawText {

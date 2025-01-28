@@ -1,10 +1,6 @@
 use serde::{Deserialize, Serialize};
-
 use crate::types::Location;
 
-
-
-/// Represents a location to which a chat is connected.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
 pub struct ChatLocation {
     /// The location address, defined by the chat owner, with a length of 1-64 characters.

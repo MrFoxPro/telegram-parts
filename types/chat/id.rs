@@ -1,12 +1,8 @@
-use std::fmt;
-
 use serde::{Deserialize, Serialize};
-
+use std::fmt;
 use crate::types::Integer;
 
 
-
-/// ID of a chat.
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
 #[serde(from = "Integer", into = "Integer")]
 pub struct ChatPeerId(Integer);

@@ -1,8 +1,5 @@
-use serde::{Deserialize, Serialize};
-
 use crate::types::{Chat, Integer};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a story.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -24,7 +21,10 @@ impl Story {
     where
         T: Into<Chat>,
     {
-        Self { chat: chat.into(), id }
+        Self {
+            chat: chat.into(),
+            id,
+        }
     }
 
     /// Sets a new chat.

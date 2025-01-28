@@ -1,13 +1,9 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{Chat, ChatId, ChatInviteLink, Integer, User},
 };
 
-
-
-/// Represents a join request sent to a chat.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct ChatJoinRequest {
     /// Chat to which the request was sent.

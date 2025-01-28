@@ -1,8 +1,5 @@
 use serde::{Deserialize, Serialize};
-
 use crate::types::Float;
-
-
 
 /// Represents a position on faces where a mask should be placed by default.
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

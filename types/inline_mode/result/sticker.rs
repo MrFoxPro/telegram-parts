@@ -1,14 +1,10 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
 use crate::types::{InlineKeyboardMarkup, InputMessageContent};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a link to a sticker stored on the Telegram servers.
 ///
@@ -80,7 +76,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultCachedSticker {
             id: value.id,
             input_message_content: value.data.input_message_content,
             reply_markup: value.data.reply_markup,
-            sticker_file_id: value.data.sticker_file_id.ok_or(MissingField("sticker_file_id"))?,
+            sticker_file_id: value
+                .data
+                .sticker_file_id
+                .ok_or(MissingField("sticker_file_id"))?,
         })
     }
 }

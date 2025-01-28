@@ -1,7 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-
-
 /// Represents the options used for link preview generation.
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, PartialOrd, Serialize)]
 pub struct LinkPreviewOptions {

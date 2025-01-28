@@ -1,13 +1,9 @@
-use std::{error::Error, fmt};
-
-use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{Integer, ParseMode, PhotoSize},
 };
-
-
+use serde::{Deserialize, Serialize};
+use std::{error::Error, fmt};
 
 /// Represents the date of birth of a user.
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -29,7 +25,11 @@ impl Birthdate {
     /// * `day` - Day.
     /// * `month` - Month.
     pub fn new(day: Integer, month: Integer) -> Self {
-        Self { day, month, year: None }
+        Self {
+            day,
+            month,
+            year: None,
+        }
     }
 
     /// Sets a new year.
@@ -327,7 +327,10 @@ impl UserProfilePhotos {
         B: IntoIterator<Item = PhotoSize>,
     {
         Self {
-            photos: photos.into_iter().map(|x| x.into_iter().collect()).collect(),
+            photos: photos
+                .into_iter()
+                .map(|x| x.into_iter().collect())
+                .collect(),
             total_count,
         }
     }

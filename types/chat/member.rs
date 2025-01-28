@@ -1,11 +1,8 @@
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
-
 use crate::{
     api::{Method, Payload},
     types::{Chat, ChatId, ChatInviteLink, ChatPermissions, Integer, User},
 };
-
-
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 /// Represents a member of a chat.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -76,7 +73,9 @@ impl ChatMemberUser {
     where
         T: Serializer,
     {
-        let value = ChatMemberUser { user: value.clone() };
+        let value = ChatMemberUser {
+            user: value.clone(),
+        };
         value.serialize(serializer)
     }
 }

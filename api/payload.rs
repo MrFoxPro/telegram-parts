@@ -1,11 +1,8 @@
-use std::{error::Error, fmt};
-
+use super::form::{Form, FormError};
 use reqwest::{Client as HttpClient, Method as HttpMethod, RequestBuilder as HttpRequestBuilder};
 use serde::ser::Serialize;
 use serde_json::Error as JsonError;
-
-use super::form::{Form, FormError};
-
+use std::{error::Error, fmt};
 
 #[derive(Debug)]
 enum PayloadData {
@@ -66,11 +63,11 @@ impl Payload {
             }
             PayloadData::Json(data) => {
                 let data = data?;
-                builder.header("Content-Type", "application/json").body(data)
-            }
-            PayloadData::Empty => {
                 builder
+                    .header("Content-Type", "application/json")
+                    .body(data)
             }
+            PayloadData::Empty => builder,
         })
     }
 }

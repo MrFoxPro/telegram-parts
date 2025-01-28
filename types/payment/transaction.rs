@@ -1,11 +1,8 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{Integer, PaidMedia, User},
 };
-
-
 
 /// Contains a list of Telegram Star transactions.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -29,24 +26,24 @@ where
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
 pub struct StarTransaction {
     /// Number of Telegram Stars transferred by the transaction.
-    amount: Integer,
+    pub amount: Integer,
     /// Date the transaction was created in Unix time.
-    date: Integer,
+    pub date: Integer,
     /// Unique identifier of the transaction.
     ///
     /// Coincides with the identifer of the original transaction for refund transactions.
     /// Coincides with `telegram_payment_charge_id` of [`crate::types::SuccessfulPayment`] for successful incoming payments from users.
-    id: String,
+    pub id: String,
     /// Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal).
     ///
     /// Only for incoming transactions.
     #[serde(skip_serializing_if = "Option::is_none")]
-    source: Option<TransactionPartner>,
+    pub source: Option<TransactionPartner>,
     ///  Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal).
     ///
     /// Only for outgoing transactions.
     #[serde(skip_serializing_if = "Option::is_none")]
-    receiver: Option<TransactionPartner>,
+    pub receiver: Option<TransactionPartner>,
 }
 
 impl StarTransaction {
@@ -137,7 +134,9 @@ enum RawTransactionPartner {
 impl From<RawTransactionPartner> for TransactionPartner {
     fn from(value: RawTransactionPartner) -> Self {
         match value {
-            RawTransactionPartner::Fragment { withdrawal_state } => Self::Fragment(withdrawal_state),
+            RawTransactionPartner::Fragment { withdrawal_state } => {
+                Self::Fragment(withdrawal_state)
+            }
             RawTransactionPartner::Other {} => Self::Other,
             RawTransactionPartner::TelegramAds {} => Self::TelegramAds,
             RawTransactionPartner::User {

@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-
 use crate::types::{
     Animation,
     Audio,
@@ -27,8 +26,6 @@ use crate::types::{
     VideoNote,
     Voice,
 };
-
-
 
 /// Contains information about a message or a story that is being replied to.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]

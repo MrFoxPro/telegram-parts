@@ -1,9 +1,7 @@
-use std::{error::Error, fmt};
-
+pub use self::{force_reply::*, inline_keyboard::*, reply_keyboard::*};
 use serde::{Deserialize, Serialize};
 use serde_json::Error as JsonError;
-
-pub use self::{force_reply::*, inline_keyboard::*, reply_keyboard::*};
+use std::{error::Error, fmt};
 
 mod force_reply;
 mod inline_keyboard;
@@ -71,7 +69,9 @@ impl Error for ReplyMarkupError {
 impl fmt::Display for ReplyMarkupError {
     fn fmt(&self, out: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            ReplyMarkupError::Serialize(err) => write!(out, "can not serialize reply markup: {}", err),
+            ReplyMarkupError::Serialize(err) => {
+                write!(out, "can not serialize reply markup: {}", err)
+            }
         }
     }
 }

@@ -1,27 +1,12 @@
-use std::{error::Error, fmt};
-
-use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Form, Method, Payload},
     types::{
-        ChatId,
-        InputFile,
-        Integer,
-        Message,
-        ParseMode,
-        PhotoSize,
-        ReplyMarkup,
-        ReplyMarkupError,
-        ReplyParameters,
-        ReplyParametersError,
-        TextEntities,
-        TextEntity,
-        TextEntityError,
+        ChatId, InputFile, Integer, Message, ParseMode, PhotoSize, ReplyMarkup, ReplyMarkupError,
+        ReplyParameters, ReplyParametersError, TextEntities, TextEntity, TextEntityError,
     },
 };
-
-
+use serde::{Deserialize, Serialize};
+use std::{error::Error, fmt};
 
 /// Represents a video file.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -65,7 +50,13 @@ impl Video {
     /// * `file_unique_id` - Unique identifier of the file.
     /// * `height` - Height of the video.
     /// * `width` - Width of the video.
-    pub fn new<A, B>(duration: Integer, file_id: A, file_unique_id: B, height: Integer, width: Integer) -> Self
+    pub fn new<A, B>(
+        duration: Integer,
+        file_id: A,
+        file_unique_id: B,
+        height: Integer,
+        width: Integer,
+    ) -> Self
     where
         A: Into<String>,
         B: Into<String>,
@@ -153,7 +144,10 @@ impl SendVideo {
         B: Into<InputFile>,
     {
         Self {
-            form: Form::from([("chat_id", chat_id.into().into()), ("video", video.into().into())]),
+            form: Form::from([
+                ("chat_id", chat_id.into().into()),
+                ("video", video.into().into()),
+            ]),
         }
     }
 
@@ -166,7 +160,8 @@ impl SendVideo {
     where
         T: Into<String>,
     {
-        self.form.insert_field("business_connection_id", value.into());
+        self.form
+            .insert_field("business_connection_id", value.into());
         self
     }
 
@@ -197,7 +192,8 @@ impl SendVideo {
         T: IntoIterator<Item = TextEntity>,
     {
         let value: TextEntities = value.into_iter().collect();
-        self.form.insert_field("caption_entities", value.serialize()?);
+        self.form
+            .insert_field("caption_entities", value.serialize()?);
         self.form.remove_field("parse_mode");
         Ok(self)
     }
@@ -310,8 +306,12 @@ impl SendVideo {
     /// # Arguments
     ///
     /// * `value` - Description of the message to reply to.
-    pub fn with_reply_parameters(mut self, value: ReplyParameters) -> Result<Self, ReplyParametersError> {
-        self.form.insert_field("reply_parameters", value.serialize()?);
+    pub fn with_reply_parameters(
+        mut self,
+        value: ReplyParameters,
+    ) -> Result<Self, ReplyParametersError> {
+        self.form
+            .insert_field("reply_parameters", value.serialize()?);
         Ok(self)
     }
 
@@ -386,7 +386,10 @@ pub enum SendVideoError {
 impl fmt::Display for SendVideoError {
     fn fmt(&self, out: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::InvalidThumbnail => write!(out, "thumbnails can’t be reused and can be only uploaded as a new file"),
+            Self::InvalidThumbnail => write!(
+                out,
+                "thumbnails can’t be reused and can be only uploaded as a new file"
+            ),
         }
     }
 }

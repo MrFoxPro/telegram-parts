@@ -1,8 +1,5 @@
-use serde::{Deserialize, Serialize};
-
 use crate::types::{Float, Integer, Location};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a location message to be sent as the result of an inline query.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

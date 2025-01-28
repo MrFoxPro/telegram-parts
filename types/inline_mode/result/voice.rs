@@ -1,14 +1,12 @@
 use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
-use crate::types::{InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity};
-
-
+use crate::types::{
+    InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity,
+};
 
 /// Represents a link to a voice recording in an OGG container encoded with OPUS.
 ///
@@ -307,7 +305,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultCachedVoice {
             parse_mode: value.data.parse_mode,
             reply_markup: value.data.reply_markup,
             title: value.data.title.ok_or(MissingField("title"))?,
-            voice_file_id: value.data.voice_file_id.ok_or(MissingField("voice_file_id"))?,
+            voice_file_id: value
+                .data
+                .voice_file_id
+                .ok_or(MissingField("voice_file_id"))?,
         })
     }
 }

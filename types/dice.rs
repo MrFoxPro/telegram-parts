@@ -1,13 +1,9 @@
 use std::fmt;
-
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{ChatId, Integer, Message, ReplyMarkup, ReplyParameters},
 };
-
-
 
 /// Represents a dice with a random value.
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, PartialEq, PartialOrd, Ord, Serialize)]
@@ -92,22 +88,22 @@ impl fmt::Display for DiceType {
 /// Sends a dice.
 #[derive(Clone, Debug, Serialize)]
 pub struct SendDice {
-    chat_id: ChatId,
-    emoji: DiceType,
+    pub chat_id: ChatId,
+    pub emoji: DiceType,
     #[serde(skip_serializing_if = "Option::is_none")]
-    business_connection_id: Option<String>,
+    pub business_connection_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    disable_notification: Option<bool>,
+    pub disable_notification: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_effect_id: Option<String>,
+    pub message_effect_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_thread_id: Option<Integer>,
+    pub message_thread_id: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    protect_content: Option<bool>,
+    pub protect_content: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<ReplyMarkup>,
+    pub reply_markup: Option<ReplyMarkup>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_parameters: Option<ReplyParameters>,
+    pub reply_parameters: Option<ReplyParameters>,
 }
 
 impl SendDice {

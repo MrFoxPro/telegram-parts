@@ -1,14 +1,10 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
 use crate::types::{InlineKeyboardMarkup, InputMessageContent, Integer};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a contact with a phone number.
 ///
@@ -159,7 +155,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultContact {
             id: value.id,
             input_message_content: value.data.input_message_content,
             last_name: value.data.last_name,
-            phone_number: value.data.phone_number.ok_or(MissingField("phone_number"))?,
+            phone_number: value
+                .data
+                .phone_number
+                .ok_or(MissingField("phone_number"))?,
             reply_markup: value.data.reply_markup,
             thumbnail_height: value.data.thumbnail_height,
             thumbnail_url: value.data.thumbnail_url,

@@ -1,13 +1,9 @@
 use std::{error::Error, fmt};
-
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{EncryptedPassportElementType, Integer},
 };
-
-
 
 /// Represents an error in the Telegram Passport element
 /// which was submitted that should be resolved by a user.

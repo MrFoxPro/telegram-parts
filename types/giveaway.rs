@@ -1,8 +1,5 @@
-use serde::{Deserialize, Serialize};
-
 use crate::types::{Chat, Integer, Message, User};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a message about a scheduled giveaway.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]

@@ -1,27 +1,12 @@
-use std::{error::Error, fmt};
-
-use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Form, Method, Payload},
     types::{
-        ChatId,
-        InputFile,
-        Integer,
-        Message,
-        ParseMode,
-        PhotoSize,
-        ReplyMarkup,
-        ReplyMarkupError,
-        ReplyParameters,
-        ReplyParametersError,
-        TextEntities,
-        TextEntity,
-        TextEntityError,
+        ChatId, InputFile, Integer, Message, ParseMode, PhotoSize, ReplyMarkup, ReplyMarkupError,
+        ReplyParameters, ReplyParametersError, TextEntities, TextEntity, TextEntityError,
     },
 };
-
-
+use serde::{Deserialize, Serialize};
+use std::{error::Error, fmt};
 
 /// Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -65,7 +50,13 @@ impl Animation {
     /// * `file_unique_id` - Unique identifier of the file.
     /// * `height` - Height.
     /// * `width` - Width.
-    pub fn new<A, B>(duration: Integer, file_id: A, file_unique_id: B, height: Integer, width: Integer) -> Self
+    pub fn new<A, B>(
+        duration: Integer,
+        file_id: A,
+        file_unique_id: B,
+        height: Integer,
+        width: Integer,
+    ) -> Self
     where
         A: Into<String>,
         B: Into<String>,
@@ -168,7 +159,8 @@ impl SendAnimation {
     where
         T: Into<String>,
     {
-        self.form.insert_field("business_connection_id", value.into());
+        self.form
+            .insert_field("business_connection_id", value.into());
         self
     }
 
@@ -199,7 +191,8 @@ impl SendAnimation {
         T: IntoIterator<Item = TextEntity>,
     {
         let value: TextEntities = value.into_iter().collect();
-        self.form.insert_field("caption_entities", value.serialize()?);
+        self.form
+            .insert_field("caption_entities", value.serialize()?);
         self.form.remove_field("parse_mode");
         Ok(self)
     }
@@ -312,8 +305,12 @@ impl SendAnimation {
     /// # Arguments
     ///
     /// * `value` - Description of the message to reply to.
-    pub fn with_reply_parameters(mut self, value: ReplyParameters) -> Result<Self, ReplyParametersError> {
-        self.form.insert_field("reply_parameters", value.serialize()?);
+    pub fn with_reply_parameters(
+        mut self,
+        value: ReplyParameters,
+    ) -> Result<Self, ReplyParametersError> {
+        self.form
+            .insert_field("reply_parameters", value.serialize()?);
         Ok(self)
     }
 
@@ -378,7 +375,10 @@ pub enum SendAnimationError {
 impl fmt::Display for SendAnimationError {
     fn fmt(&self, out: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::InvalidThumbnail => write!(out, "thumbnails can’t be reused and can be only uploaded as a new file"),
+            Self::InvalidThumbnail => write!(
+                out,
+                "thumbnails can’t be reused and can be only uploaded as a new file"
+            ),
         }
     }
 }

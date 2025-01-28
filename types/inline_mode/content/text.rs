@@ -1,8 +1,5 @@
-use serde::{Deserialize, Serialize};
-
 use crate::types::{LinkPreviewOptions, ParseMode, Text, TextEntities, TextEntity};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a text message to be sent as the result of an inline query.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

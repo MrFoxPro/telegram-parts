@@ -1,18 +1,11 @@
+use crate::types::{
+    Float, InlineKeyboardMarkup, InlineQueryResult, InputMessageContent, Integer, ParseMode,
+    TextEntities,
+};
+use serde::{Deserialize, Serialize};
 use std::{
     error::Error,
     fmt::{Display, Formatter},
-};
-
-use serde::{Deserialize, Serialize};
-
-use crate::types::{
-    Float,
-    InlineKeyboardMarkup,
-    InlineQueryResult,
-    InputMessageContent,
-    Integer,
-    ParseMode,
-    TextEntities,
 };
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
@@ -205,7 +198,9 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResult {
                     InlineQueryResult::Audio(value.try_into()?)
                 }
             }
-            RawInlineQueryResultType::CachedSticker => InlineQueryResult::CachedSticker(value.try_into()?),
+            RawInlineQueryResultType::CachedSticker => {
+                InlineQueryResult::CachedSticker(value.try_into()?)
+            }
             RawInlineQueryResultType::Contact => InlineQueryResult::Contact(value.try_into()?),
             RawInlineQueryResultType::Document | RawInlineQueryResultType::CachedDocument => {
                 if value.data.document_file_id.is_some() {
@@ -291,7 +286,9 @@ pub(super) enum RawInlineQueryResultDataError {
 impl Display for RawInlineQueryResultDataError {
     fn fmt(&self, out: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            RawInlineQueryResultDataError::MissingField(field_name) => write!(out, "Field {} is missing", field_name),
+            RawInlineQueryResultDataError::MissingField(field_name) => {
+                write!(out, "Field {} is missing", field_name)
+            }
         }
     }
 }

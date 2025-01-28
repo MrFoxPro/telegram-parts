@@ -4,13 +4,9 @@ use std::{
     fmt,
     ops::{Index, IndexMut, Range},
 };
-
 use serde::{Deserialize, Serialize};
 use serde_json::Error as JsonError;
-
 use crate::types::User;
-
-
 
 /// Represents a collection of text entities.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -207,7 +203,10 @@ impl TextEntity {
     ///
     /// * `pos` - Position of the entity in UTF-16 code units.
     /// * `custom_emoji_id` - Unique identifier of the custom emoji.
-    pub fn custom_emoji<P: Into<TextEntityPosition>, I: Into<String>>(pos: P, custom_emoji_id: I) -> TextEntity {
+    pub fn custom_emoji<P: Into<TextEntityPosition>, I: Into<String>>(
+        pos: P,
+        custom_emoji_id: I,
+    ) -> TextEntity {
         TextEntity::CustomEmoji {
             position: pos.into(),
             custom_emoji_id: custom_emoji_id.into(),
@@ -220,7 +219,10 @@ impl TextEntity {
     ///
     /// * `pos` - Position of the entity in UTF-16 code units.
     /// * `language` - The programming language of the entity text.
-    pub fn pre<P: Into<TextEntityPosition>, L: Into<String>>(pos: P, language: Option<L>) -> TextEntity {
+    pub fn pre<P: Into<TextEntityPosition>, L: Into<String>>(
+        pos: P,
+        language: Option<L>,
+    ) -> TextEntity {
         TextEntity::Pre {
             position: pos.into(),
             language: language.map(|x| x.into()),
@@ -406,7 +408,10 @@ impl From<TextEntity> for RawTextEntity {
             TextEntity::Italic(p) => raw!(Italic(p)),
             TextEntity::Mention(p) => raw!(Mention(p)),
             TextEntity::PhoneNumber(p) => raw!(PhoneNumber(p)),
-            TextEntity::Pre { position: p, language } => raw!(Pre(p, language)),
+            TextEntity::Pre {
+                position: p,
+                language,
+            } => raw!(Pre(p, language)),
             TextEntity::Spoiler(p) => raw!(Spoiler(p)),
             TextEntity::Strikethrough(p) => raw!(Strikethrough(p)),
             TextEntity::TextLink { position: p, url } => raw!(TextLink(p, url)),

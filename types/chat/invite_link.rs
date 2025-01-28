@@ -1,13 +1,10 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{ChatId, Integer, User},
 };
 
 
-
-/// Represents an invite link for a chat.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
 pub struct ChatInviteLink {
     /// Indicates whether users joining the chat via the link

@@ -1,14 +1,8 @@
 use std::fmt;
-
 use serde::{
     de::{Error, Unexpected},
-    Deserialize,
-    Deserializer,
-    Serialize,
-    Serializer,
+    Deserialize, Deserializer, Serialize, Serializer,
 };
-
-
 
 macro_rules! impl_bool_type {
     ($name:ident = $value:ident) => {
@@ -33,7 +27,10 @@ macro_rules! impl_bool_type {
                 if b == $value {
                     Ok(Self)
                 } else {
-                    Err(D::Error::invalid_value(Unexpected::Bool(b), &stringify!($value)))
+                    Err(D::Error::invalid_value(
+                        Unexpected::Bool(b),
+                        &stringify!($value),
+                    ))
                 }
             }
         }

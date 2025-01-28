@@ -1,5 +1,4 @@
 use std::{error::Error, fmt, future::Future, time::Duration};
-
 use bytes::Bytes;
 use futures_util::stream::Stream;
 use reqwest::{
@@ -10,11 +9,8 @@ use reqwest::{
 };
 use serde::de::DeserializeOwned;
 use tokio::time::sleep;
-
 use super::payload::{Payload, PayloadError};
 use crate::types::{Response, ResponseError};
-
-
 
 const DEFAULT_HOST: &str = "https://api.telegram.org";
 
@@ -169,7 +165,7 @@ pub trait MethodExt: Method + Sized {
 impl<M> MethodExt for M
 where
 	M: Method + Send + 'static,
-	M::Response:  DeserializeOwned + Send + 'static
+	M::Response: DeserializeOwned + Send + 'static
 {
 	fn exec(self, client: &Client) -> impl Future<Output = Result<M::Response, ExecuteError>> {
         client.execute(self)

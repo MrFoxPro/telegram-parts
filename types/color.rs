@@ -1,10 +1,6 @@
 use std::{error::Error, fmt};
-
 use serde::{Deserialize, Serialize};
-
 use crate::types::Integer;
-
-
 
 /// Represents an accent color.
 ///

@@ -1,14 +1,10 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
 use crate::types::{Float, InlineKeyboardMarkup, InputMessageContent, Integer};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a location on a map.
 ///

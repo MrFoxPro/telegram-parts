@@ -1,16 +1,12 @@
-use std::{error::Error, fmt};
-
+use crate::types::{True, WebAppInfo};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde_json::Error as JsonError;
-
-use crate::types::{True, WebAppInfo};
-
-
+use std::{error::Error, fmt};
 
 /// Represents an inline keyboard that appears right next to the message it belongs to.
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct InlineKeyboardMarkup {
-    inline_keyboard: Vec<Vec<InlineKeyboardButton>>,
+    pub inline_keyboard: Vec<Vec<InlineKeyboardButton>>,
 }
 
 impl InlineKeyboardMarkup {
@@ -52,9 +48,9 @@ impl From<InlineKeyboardMarkup> for Vec<Vec<InlineKeyboardButton>> {
 /// Represents a button of an inline keyboard.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct InlineKeyboardButton {
-    text: String,
+    pub text: String,
     #[serde(flatten)]
-    button_type: InlineKeyboardButtonType,
+    pub button_type: InlineKeyboardButtonType,
 }
 
 impl InlineKeyboardButton {
@@ -98,8 +94,12 @@ impl InlineKeyboardButton {
         A: Into<String>,
         B: Serialize,
     {
-        let data = serde_json::to_string(data).map_err(InlineKeyboardError::SerializeCallbackData)?;
-        Ok(Self::new(text, InlineKeyboardButtonType::CallbackData(data)))
+        let data =
+            serde_json::to_string(data).map_err(InlineKeyboardError::SerializeCallbackData)?;
+        Ok(Self::new(
+            text,
+            InlineKeyboardButtonType::CallbackData(data),
+        ))
     }
 
     /// Creates a new `InlineKeyboardButton`.
@@ -185,7 +185,10 @@ impl InlineKeyboardButton {
         A: Into<String>,
         B: Into<String>,
     {
-        Self::new(text, InlineKeyboardButtonType::SwitchInlineQuery(data.into()))
+        Self::new(
+            text,
+            InlineKeyboardButtonType::SwitchInlineQuery(data.into()),
+        )
     }
 
     /// Creates a new `InlineKeyboardButton`.
@@ -197,11 +200,17 @@ impl InlineKeyboardButton {
     ///
     /// Pressing the button will prompt the user to select one of their chats of the specified type,
     /// open that chat and insert the bot username and the specified inline query in the input field.
-    pub fn for_switch_inline_query_chosen_chat<T>(text: T, data: SwitchInlineQueryChosenChat) -> Self
+    pub fn for_switch_inline_query_chosen_chat<T>(
+        text: T,
+        data: SwitchInlineQueryChosenChat,
+    ) -> Self
     where
         T: Into<String>,
     {
-        Self::new(text, InlineKeyboardButtonType::SwitchInlineQueryChosenChat(data))
+        Self::new(
+            text,
+            InlineKeyboardButtonType::SwitchInlineQueryChosenChat(data),
+        )
     }
 
     /// Creates a new `InlineKeyboardButton`.

@@ -1,8 +1,5 @@
-use serde::{Deserialize, Serialize};
-
 use crate::types::Contact;
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a contact message to be sent as the result of an inline query.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

@@ -1,11 +1,8 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{Integer, WebAppInfo},
 };
-
-
 
 /// Represents a menu button of the bot in a private chat.
 ///

@@ -1,8 +1,5 @@
 use serde::{Deserialize, Serialize};
-
 use crate::types::{Document, Integer};
-
-
 
 /// Describes the way a background is filled based on the selected colors.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

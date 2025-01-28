@@ -1,7 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-
-
 /// Represents a reply interface trigger.
 ///
 /// Upon receiving a message with this object, Telegram clients

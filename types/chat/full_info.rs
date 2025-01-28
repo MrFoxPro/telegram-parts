@@ -1,22 +1,8 @@
-use serde::{Deserialize, Serialize};
-
 use crate::types::{
-    AccentColor,
-    Birthdate,
-    BusinessIntro,
-    BusinessLocation,
-    BusinessOpeningHours,
-    Chat,
-    ChatLocation,
-    ChatPermissions,
-    ChatPhoto,
-    Integer,
-    Message,
-    ProfileAccentColor,
-    ReactionType,
+    AccentColor, Birthdate, BusinessIntro, BusinessLocation, BusinessOpeningHours, Chat,
+    ChatLocation, ChatPermissions, ChatPhoto, Integer, Message, ProfileAccentColor, ReactionType,
 };
-
-
+use serde::{Deserialize, Serialize};
 
 /// Type of the chat.
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -72,7 +58,10 @@ pub struct ChatFullInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub pinned_message: Option<Message>,
     /// Identifier of the accent color for the chat's profile background.
-    #[serde(rename = "profile_accent_color_id", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "profile_accent_color_id",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub profile_accent_color: Option<ProfileAccentColor>,
     /// Custom emoji identifier of the emoji chosen by the chat for its profile background.
     #[serde(skip_serializing_if = "Option::is_none")]

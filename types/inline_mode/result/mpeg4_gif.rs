@@ -1,14 +1,12 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
-use crate::types::{InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity};
-
-
+use crate::types::{
+    InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity,
+};
+use serde::{Deserialize, Serialize};
 
 /// Represents a link to a video animation (H.264/MPEG-4 AVC video without sound).
 ///
@@ -374,7 +372,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultMpeg4Gif {
             reply_markup: value.data.reply_markup,
             show_caption_above_media: value.data.show_caption_above_media,
             thumbnail_mime_type: value.data.thumbnail_mime_type,
-            thumbnail_url: value.data.thumbnail_url.ok_or(MissingField("thumbnail_url"))?,
+            thumbnail_url: value
+                .data
+                .thumbnail_url
+                .ok_or(MissingField("thumbnail_url"))?,
             title: value.data.title,
         })
     }
@@ -414,7 +415,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultCachedMpeg4Gif {
             caption: value.data.caption,
             caption_entities: value.data.caption_entities,
             input_message_content: value.data.input_message_content,
-            mpeg4_file_id: value.data.mpeg4_file_id.ok_or(MissingField("mpeg4_file_id"))?,
+            mpeg4_file_id: value
+                .data
+                .mpeg4_file_id
+                .ok_or(MissingField("mpeg4_file_id"))?,
             parse_mode: value.data.parse_mode,
             show_caption_above_media: value.data.show_caption_above_media,
             reply_markup: value.data.reply_markup,

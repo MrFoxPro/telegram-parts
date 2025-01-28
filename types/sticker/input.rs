@@ -1,14 +1,10 @@
 use std::{fmt, fmt::Formatter};
-
 use serde::Serialize;
 use serde_json::Error as JsonError;
-
 use crate::{
     api::Form,
     types::{InputFile, MaskPosition, StickerFormat},
 };
-
-
 
 /// Represents a metadata of a sticker to be added to a sticker set.
 #[derive(Debug)]
@@ -151,7 +147,8 @@ impl TryFrom<InputStickers> for Form {
     type Error = InputStickerError;
 
     fn try_from(mut value: InputStickers) -> Result<Self, Self::Error> {
-        let stickers = serde_json::to_string(&value.metadata).map_err(InputStickerError::Serialize)?;
+        let stickers =
+            serde_json::to_string(&value.metadata).map_err(InputStickerError::Serialize)?;
         value.form.insert_field("stickers", stickers);
         Ok(value.form)
     }
@@ -167,7 +164,9 @@ pub enum InputStickerError {
 impl fmt::Display for InputStickerError {
     fn fmt(&self, out: &mut Formatter<'_>) -> fmt::Result {
         match self {
-            Self::Serialize(err) => write!(out, "could not serialize a list of input stickers: {}", err),
+            Self::Serialize(err) => {
+                write!(out, "could not serialize a list of input stickers: {}", err)
+            }
         }
     }
 }

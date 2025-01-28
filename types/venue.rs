@@ -1,11 +1,8 @@
-use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{ChatId, Float, Integer, Location, Message, ReplyMarkup, ReplyParameters},
 };
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a venue.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

@@ -1,24 +1,11 @@
-use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Form, Method, Payload},
     types::{
-        ChatId,
-        InputFile,
-        Integer,
-        Message,
-        ParseMode,
-        ReplyMarkup,
-        ReplyMarkupError,
-        ReplyParameters,
-        ReplyParametersError,
-        TextEntities,
-        TextEntity,
-        TextEntityError,
+        ChatId, InputFile, Integer, Message, ParseMode, ReplyMarkup, ReplyMarkupError,
+        ReplyParameters, ReplyParametersError, TextEntities, TextEntity, TextEntityError,
     },
 };
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a voice file.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -112,7 +99,10 @@ impl SendVoice {
         B: Into<InputFile>,
     {
         Self {
-            form: Form::from([("chat_id", chat_id.into().into()), ("voice", voice.into().into())]),
+            form: Form::from([
+                ("chat_id", chat_id.into().into()),
+                ("voice", voice.into().into()),
+            ]),
         }
     }
 
@@ -125,7 +115,8 @@ impl SendVoice {
     where
         T: Into<String>,
     {
-        self.form.insert_field("business_connection_id", value.into());
+        self.form
+            .insert_field("business_connection_id", value.into());
         self
     }
 
@@ -156,7 +147,8 @@ impl SendVoice {
         T: IntoIterator<Item = TextEntity>,
     {
         let value: TextEntities = value.into_iter().collect();
-        self.form.insert_field("caption_entities", value.serialize()?);
+        self.form
+            .insert_field("caption_entities", value.serialize()?);
         self.form.remove_field("parse_mode");
         Ok(self)
     }
@@ -249,8 +241,12 @@ impl SendVoice {
     /// # Arguments
     ///
     /// * `value` - Description of the message to reply to.
-    pub fn with_reply_parameters(mut self, value: ReplyParameters) -> Result<Self, ReplyParametersError> {
-        self.form.insert_field("reply_parameters", value.serialize()?);
+    pub fn with_reply_parameters(
+        mut self,
+        value: ReplyParameters,
+    ) -> Result<Self, ReplyParametersError> {
+        self.form
+            .insert_field("reply_parameters", value.serialize()?);
         Ok(self)
     }
 }

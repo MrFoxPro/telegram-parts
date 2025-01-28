@@ -1,9 +1,6 @@
 use serde::{Deserialize, Serialize};
-
 pub use self::{checkout::*, invoice::*, order::*, refund::*, shipping::*, transaction::*};
 use crate::types::Integer;
-
-
 
 mod checkout;
 mod invoice;

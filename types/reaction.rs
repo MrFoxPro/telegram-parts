@@ -1,11 +1,8 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{Chat, ChatId, Integer, User},
 };
-
-
 
 /// Represents a reaction added to a message along with the number of times it was added.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -165,7 +162,13 @@ impl MessageReactionUpdated {
     /// * `message_id` - Unique identifier of the message inside the chat.
     /// * `new_reaction` - New list of reaction types that have been set by the user.
     /// * `old_reaction` - Previous list of reaction types that were set by the user.
-    pub fn new<A, B, C>(chat: A, date: Integer, message_id: Integer, new_reaction: B, old_reaction: C) -> Self
+    pub fn new<A, B, C>(
+        chat: A,
+        date: Integer,
+        message_id: Integer,
+        new_reaction: B,
+        old_reaction: C,
+    ) -> Self
     where
         A: Into<Chat>,
         B: IntoIterator<Item = ReactionType>,

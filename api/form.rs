@@ -1,5 +1,4 @@
 use std::{collections::HashMap, error::Error, fmt, fmt::Formatter};
-
 use mime::Mime;
 use reqwest::{
     multipart::{Form as MultipartForm, Part},
@@ -90,7 +89,7 @@ impl TryFrom<FormValue> for Part {
 }
 
 #[derive(Debug, Default, PartialEq)]
-pub(crate) struct Form {
+pub struct Form {
     fields: HashMap<String, FormValue>,
 }
 

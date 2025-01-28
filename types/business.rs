@@ -1,11 +1,8 @@
-use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{Chat, Integer, Location, Sticker, User},
 };
-
-
+use serde::{Deserialize, Serialize};
 
 /// Describes the connection of the bot with a business account.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

@@ -1,9 +1,6 @@
-use serde::{Deserialize, Deserializer, Serialize};
-
 pub use self::{command::*, data::*, methods::*, origin::*, quote::*, reply::*, sender::*};
 use crate::types::{Chat, InlineKeyboardMarkup, Integer, LinkPreviewOptions, Text, User};
-
-
+use serde::{Deserialize, Deserializer, Serialize};
 
 mod command;
 mod data;

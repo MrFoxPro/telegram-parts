@@ -1,10 +1,6 @@
 use std::ops::Not;
-
 use serde::{Deserialize, Serialize};
-
 use crate::types::{ChatAdministratorRights, Integer, PollType, True, WebAppInfo};
-
-
 
 /// Represents a custom keyboard with reply options.
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -271,7 +267,9 @@ pub struct KeyboardButtonPollType {
 
 impl From<PollType> for KeyboardButtonPollType {
     fn from(value: PollType) -> Self {
-        Self { poll_type: Some(value) }
+        Self {
+            poll_type: Some(value),
+        }
     }
 }
 

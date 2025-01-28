@@ -1,14 +1,12 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
-use crate::types::{InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity};
-
-
+use crate::types::{
+    InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity,
+};
+use serde::{Deserialize, Serialize};
 
 /// Represents a link to a file.
 ///
@@ -332,7 +330,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultDocument {
             caption: value.data.caption,
             caption_entities: value.data.caption_entities,
             description: value.data.description,
-            document_url: value.data.document_url.ok_or(MissingField("document_url"))?,
+            document_url: value
+                .data
+                .document_url
+                .ok_or(MissingField("document_url"))?,
             id: value.id,
             input_message_content: value.data.input_message_content,
             mime_type: value.data.mime_type.ok_or(MissingField("mime_type"))?,
@@ -378,7 +379,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultCachedDocument {
             caption: value.data.caption,
             caption_entities: value.data.caption_entities,
             description: value.data.description,
-            document_file_id: value.data.document_file_id.ok_or(MissingField("document_file_id"))?,
+            document_file_id: value
+                .data
+                .document_file_id
+                .ok_or(MissingField("document_file_id"))?,
             id: value.id,
             input_message_content: value.data.input_message_content,
             parse_mode: value.data.parse_mode,

@@ -1,24 +1,10 @@
-use serde::{Deserialize, Serialize};
-
 use self::raw::RawInlineQueryResult;
 pub use self::{
-    article::*,
-    audio::*,
-    contact::*,
-    document::*,
-    game::*,
-    gif::*,
-    location::*,
-    mpeg4_gif::*,
-    photo::*,
-    sticker::*,
-    venue::*,
-    video::*,
-    voice::*,
+    article::*, audio::*, contact::*, document::*, game::*, gif::*, location::*, mpeg4_gif::*,
+    photo::*, sticker::*, venue::*, video::*, voice::*,
 };
 use crate::types::{Location, User, WebAppInfo};
-
-
+use serde::{Deserialize, Serialize};
 
 mod article;
 mod audio;

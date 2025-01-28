@@ -1,41 +1,16 @@
-use std::{collections::HashSet, time::Duration};
-
-use serde::{Deserialize, Serialize};
-use serde_json::Value as JsonValue;
-
 use crate::{
     api::{Method, Payload},
     types::{
-        BusinessConnection,
-        BusinessMessagesDeleted,
-        CallbackQuery,
-        Chat,
-        ChatBoostRemoved,
-        ChatBoostUpdated,
-        ChatJoinRequest,
-        ChatMemberUpdated,
-        ChatPeerId,
-        ChatUsername,
-        ChosenInlineResult,
-        InlineQuery,
-        Integer,
-        MaybeInaccessibleMessage,
-        Message,
-        MessageReactionCountUpdated,
-        MessageReactionUpdated,
-        PaidMediaPurchased,
-        Poll,
-        PollAnswer,
-        PollAnswerVoter,
-        PreCheckoutQuery,
-        ShippingQuery,
-        User,
-        UserPeerId,
-        UserUsername,
+        BusinessConnection, BusinessMessagesDeleted, CallbackQuery, Chat, ChatBoostRemoved,
+        ChatBoostUpdated, ChatJoinRequest, ChatMemberUpdated, ChatPeerId, ChatUsername,
+        ChosenInlineResult, InlineQuery, Integer, MaybeInaccessibleMessage, Message,
+        MessageReactionCountUpdated, MessageReactionUpdated, PaidMediaPurchased, Poll, PollAnswer,
+        PollAnswerVoter, PreCheckoutQuery, ShippingQuery, User, UserPeerId, UserUsername,
     },
 };
-
-
+use serde::{Deserialize, Serialize};
+use serde_json::Value as JsonValue;
+use std::{collections::HashSet, time::Duration};
 
 /// Represents an incoming update.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -68,16 +43,18 @@ impl Update {
 
     /// Returns the chat.
     pub fn get_chat(&self) -> Option<&Chat> {
-        self.get_message().map(|msg| &msg.chat).or(match self.update_type {
-            UpdateType::BotStatus(ref x) | UpdateType::UserStatus(ref x) => Some(&x.chat),
-            UpdateType::DeletedBusinessMessages(ref x) => Some(&x.chat),
-            UpdateType::ChatBoostRemoved(ref x) => Some(&x.chat),
-            UpdateType::ChatBoostUpdated(ref x) => Some(&x.chat),
-            UpdateType::ChatJoinRequest(ref x) => Some(&x.chat),
-            UpdateType::MessageReaction(ref x) => Some(&x.chat),
-            UpdateType::MessageReactionCount(ref x) => Some(&x.chat),
-            _ => None,
-        })
+        self.get_message()
+            .map(|msg| &msg.chat)
+            .or(match self.update_type {
+                UpdateType::BotStatus(ref x) | UpdateType::UserStatus(ref x) => Some(&x.chat),
+                UpdateType::DeletedBusinessMessages(ref x) => Some(&x.chat),
+                UpdateType::ChatBoostRemoved(ref x) => Some(&x.chat),
+                UpdateType::ChatBoostUpdated(ref x) => Some(&x.chat),
+                UpdateType::ChatJoinRequest(ref x) => Some(&x.chat),
+                UpdateType::MessageReaction(ref x) => Some(&x.chat),
+                UpdateType::MessageReactionCount(ref x) => Some(&x.chat),
+                _ => None,
+            })
     }
 
     /// Returns the ID of the chat.
@@ -485,13 +462,13 @@ pub enum AllowedUpdate {
 #[derive(Clone, Debug, Default, Serialize)]
 pub struct GetUpdates {
     #[serde(skip_serializing_if = "Option::is_none")]
-    allowed_updates: Option<HashSet<AllowedUpdate>>,
+    pub allowed_updates: Option<HashSet<AllowedUpdate>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    limit: Option<Integer>,
+    pub limit: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    offset: Option<Integer>,
+    pub offset: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    timeout: Option<Integer>,
+    pub timeout: Option<Integer>,
 }
 
 impl Method for GetUpdates {

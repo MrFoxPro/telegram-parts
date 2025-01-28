@@ -1,8 +1,5 @@
 use serde::{Deserialize, Serialize};
-
 use crate::types::{Chat, ChatPeerId, ChatUsername, User, UserPeerId, UserUsername};
-
-
 
 /// Represents a sender of a message.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]

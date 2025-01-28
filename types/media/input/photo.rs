@@ -1,8 +1,5 @@
-use serde::{Deserialize, Serialize};
-
 use crate::types::{ParseMode, TextEntities, TextEntity};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a photo to be sent.
 #[derive(Clone, Default, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

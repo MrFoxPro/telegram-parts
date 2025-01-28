@@ -1,8 +1,6 @@
 use std::{error::Error, fmt};
-
 use serde::Serialize;
 use serde_json::Error as JsonError;
-
 use crate::{
     api::{Form, Method, Payload},
     types::{
@@ -19,15 +17,13 @@ use crate::{
     },
 };
 
-
-
 const MIN_GROUP_ATTACHMENTS: usize = 2;
 const MAX_GROUP_ATTACHMENTS: usize = 10;
 
 /// Represents a group of input media to be sent.
 #[derive(Debug)]
 pub struct MediaGroup {
-    form: Form,
+    pub form: Form,
 }
 
 impl MediaGroup {
@@ -95,9 +91,9 @@ impl From<MediaGroup> for Form {
 /// Represents a media group item.
 #[derive(Debug)]
 pub struct MediaGroupItem {
-    file: InputFile,
-    item_type: MediaGroupItemType,
-    thumbnail: Option<InputFile>,
+    pub file: InputFile,
+    pub item_type: MediaGroupItemType,
+    pub thumbnail: Option<InputFile>,
 }
 
 impl MediaGroupItem {
@@ -181,7 +177,7 @@ impl MediaGroupItem {
 }
 
 #[derive(Debug)]
-enum MediaGroupItemType {
+pub enum MediaGroupItemType {
     Audio(InputMediaAudio),
     Document(InputMediaDocument),
     Photo(InputMediaPhoto),
@@ -191,7 +187,7 @@ enum MediaGroupItemType {
 #[derive(Debug, Serialize)]
 #[serde(tag = "type")]
 #[serde(rename_all = "lowercase")]
-enum MediaGroupItemData {
+pub enum MediaGroupItemData {
     Audio {
         media: String,
         #[serde(skip_serializing_if = "Option::is_none")]
@@ -257,7 +253,7 @@ impl fmt::Display for MediaGroupError {
 /// Sends a group of photos or videos as an album.
 #[derive(Debug)]
 pub struct SendMediaGroup {
-    form: Form,
+    pub form: Form,
 }
 
 impl SendMediaGroup {

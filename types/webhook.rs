@@ -1,15 +1,11 @@
-use std::collections::HashSet;
-
 use serde::{Deserialize, Serialize};
-
+use std::collections::HashSet;
 use crate::{
     api::{Method, Payload},
     types::{AllowedUpdate, Integer},
 };
 
 
-
-/// Represents a current status of a webhook.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
 pub struct WebhookInfo {
     /// Indicates whether a custom certificate was provided for webhook certificate checks.
@@ -142,7 +138,7 @@ impl WebhookInfo {
 /// Removes a webhook integration if you decide to switch back to [`crate::types::GetUpdates`].
 #[derive(Clone, Copy, Debug, Default, Serialize)]
 pub struct DeleteWebhook {
-    drop_pending_updates: Option<bool>,
+    pub drop_pending_updates: Option<bool>,
 }
 
 impl DeleteWebhook {
@@ -194,17 +190,17 @@ impl Method for GetWebhookInfo {
 pub struct SetWebhook {
     url: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    allowed_updates: Option<HashSet<AllowedUpdate>>,
+    pub allowed_updates: Option<HashSet<AllowedUpdate>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    certificate: Option<String>,
+    pub certificate: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    drop_pending_updates: Option<bool>,
+    pub drop_pending_updates: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    ip_address: Option<String>,
+    pub ip_address: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    max_connections: Option<Integer>,
+    pub max_connections: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    secret_token: Option<String>,
+    pub secret_token: Option<String>,
 }
 
 impl SetWebhook {

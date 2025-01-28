@@ -1,14 +1,12 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
-use crate::types::{InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity};
-
-
+use crate::types::{
+    InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity,
+};
+use serde::{Deserialize, Serialize};
 
 /// Represents a link to an animated GIF file.
 ///
@@ -373,7 +371,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultGif {
             show_caption_above_media: value.data.show_caption_above_media,
             reply_markup: value.data.reply_markup,
             thumbnail_mime_type: value.data.thumbnail_mime_type,
-            thumbnail_url: value.data.thumbnail_url.ok_or(MissingField("thumbnail_url"))?,
+            thumbnail_url: value
+                .data
+                .thumbnail_url
+                .ok_or(MissingField("thumbnail_url"))?,
             title: value.data.title,
         })
     }

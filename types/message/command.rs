@@ -1,8 +1,5 @@
 use std::{convert::TryFrom, error::Error, fmt, string::FromUtf16Error};
-
 use crate::types::Message;
-
-
 
 /// A simple command implementation.
 ///

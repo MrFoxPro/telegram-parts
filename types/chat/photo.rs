@@ -1,11 +1,8 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Form, Method, Payload},
     types::{ChatId, InputFile},
 };
-
-
 
 /// Represents a chat photo.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -39,7 +36,12 @@ impl ChatPhoto {
     /// * `big_file_unique_id` - Unique file identifier of a big (640x640) chat photo.
     /// * `small_file_id` - File identifier of a small (160x160) chat photo.
     /// * `small_file_unique_id` - Unique file identifier of a small (160x160) chat photo.
-    pub fn new<A, B, C, D>(big_file_id: A, big_file_unique_id: B, small_file_id: C, small_file_unique_id: D) -> Self
+    pub fn new<A, B, C, D>(
+        big_file_id: A,
+        big_file_unique_id: B,
+        small_file_id: C,
+        small_file_unique_id: D,
+    ) -> Self
     where
         A: Into<String>,
         B: Into<String>,
@@ -124,7 +126,10 @@ impl SetChatPhoto {
         B: Into<InputFile>,
     {
         Self {
-            form: Form::from([("chat_id", chat_id.into().into()), ("photo", photo.into().into())]),
+            form: Form::from([
+                ("chat_id", chat_id.into().into()),
+                ("photo", photo.into().into()),
+            ]),
         }
     }
 }

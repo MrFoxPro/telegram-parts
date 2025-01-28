@@ -1,8 +1,5 @@
 use serde::{Deserialize, Serialize};
-
 use crate::types::{Chat, Integer, User};
-
-
 
 /// Describes the origin of a message.
 #[derive(Clone, Debug, Deserialize, derive_more::From, PartialEq, Serialize)]

@@ -1,11 +1,8 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{LabeledPrice, User},
 };
-
-
 
 /// Represents a shipping address.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -129,7 +126,12 @@ impl ShippingQuery {
     /// * `from` - Query sender.
     /// * `invoice_payload` - Bot specified payload.
     /// * `shipping_address` - User specified address.
-    pub fn new<A, B>(id: A, from: User, invoice_payload: B, shipping_address: ShippingAddress) -> Self
+    pub fn new<A, B>(
+        id: A,
+        from: User,
+        invoice_payload: B,
+        shipping_address: ShippingAddress,
+    ) -> Self
     where
         A: Into<String>,
         B: Into<String>,

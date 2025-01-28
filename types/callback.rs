@@ -1,14 +1,10 @@
 use std::{error::Error, fmt};
-
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Error as JsonError;
-
 use crate::{
     api::{Method, Payload},
     types::{Integer, MaybeInaccessibleMessage, User},
 };
-
-
 
 /// Represents an incoming callback query from a callback button in an inline keyboard.
 ///

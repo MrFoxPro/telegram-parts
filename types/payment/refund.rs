@@ -1,11 +1,8 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::Integer,
 };
-
-
 
 /// Contains basic information about a refunded payment.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -38,7 +35,12 @@ impl RefundedPayment {
     /// * `invoice_payload` - Bot-specified invoice payload.
     /// * `telegram_payment_charge_id` - Telegram payment identifier.
     /// * `total_amount` - Total refunded price in the smallest units of the currency.
-    pub fn new<A, B, C>(currency: A, invoice_payload: B, telegram_payment_charge_id: C, total_amount: Integer) -> Self
+    pub fn new<A, B, C>(
+        currency: A,
+        invoice_payload: B,
+        telegram_payment_charge_id: C,
+        total_amount: Integer,
+    ) -> Self
     where
         A: Into<String>,
         B: Into<String>,

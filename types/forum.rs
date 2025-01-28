@@ -1,11 +1,8 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{ChatId, ForumTopicIconColor, Integer, Sticker},
 };
-
-
 
 /// Represents a forum topic.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -63,8 +60,8 @@ impl ForumTopic {
 /// unless it is the creator of the topic.
 #[derive(Clone, Debug, Serialize)]
 pub struct CloseForumTopic {
-    chat_id: ChatId,
-    message_thread_id: Integer,
+    pub chat_id: ChatId,
+    pub message_thread_id: Integer,
 }
 
 impl CloseForumTopic {
@@ -99,12 +96,12 @@ impl Method for CloseForumTopic {
 /// and must have the can_manage_topics administrator rights.
 #[derive(Clone, Debug, Serialize)]
 pub struct CreateForumTopic {
-    chat_id: ChatId,
-    name: String,
+    pub chat_id: ChatId,
+    pub name: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    icon_color: Option<ForumTopicIconColor>,
+    pub icon_color: Option<ForumTopicIconColor>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    icon_custom_emoji_id: Option<String>,
+    pub icon_custom_emoji_id: Option<String>,
 }
 
 impl CreateForumTopic {
@@ -167,7 +164,7 @@ impl Method for CreateForumTopic {
 /// and must have the can_manage_topics administrator rights.
 #[derive(Clone, Debug, Serialize)]
 pub struct CloseGeneralForumTopic {
-    chat_id: ChatId,
+    pub chat_id: ChatId,
 }
 
 impl CloseGeneralForumTopic {

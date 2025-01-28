@@ -1,30 +1,14 @@
-use std::{error::Error, fmt};
-
-use serde::{Deserialize, Serialize};
-use serde_json::Error as JsonError;
-
 use crate::{
     api::{Form, Method, Payload},
     types::{
-        ChatId,
-        InputFile,
-        Integer,
-        Message,
-        ParseMode,
-        PhotoSize,
-        ReplyMarkup,
-        ReplyMarkupError,
-        ReplyParameters,
-        ReplyParametersError,
-        TextEntities,
-        TextEntity,
-        TextEntityError,
-        User,
+        ChatId, InputFile, Integer, Message, ParseMode, PhotoSize, ReplyMarkup, ReplyMarkupError,
+        ReplyParameters, ReplyParametersError, TextEntities, TextEntity, TextEntityError, User,
         Video,
     },
 };
-
-
+use serde::{Deserialize, Serialize};
+use serde_json::Error as JsonError;
+use std::{error::Error, fmt};
 
 /// Contains information about a paid media purchase.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -239,7 +223,8 @@ impl SendPaidMedia {
     where
         T: Into<String>,
     {
-        self.form.insert_field("business_connection_id", value.into());
+        self.form
+            .insert_field("business_connection_id", value.into());
         self
     }
 
@@ -324,7 +309,10 @@ impl SendPaidMedia {
     /// # Arguments
     ///
     /// `value` - Description of the message to reply to.
-    pub fn with_reply_parameters(mut self, value: ReplyParameters) -> Result<Self, ReplyParametersError> {
+    pub fn with_reply_parameters(
+        mut self,
+        value: ReplyParameters,
+    ) -> Result<Self, ReplyParametersError> {
         let value = value.serialize()?;
         self.form.insert_field("reply_parameters", value);
         Ok(self)
@@ -386,10 +374,14 @@ impl InputPaidMediaGroup {
 
         let total_items = items.len();
         if total_items < MIN_INPUT_GROUP_ITEMS {
-            return Err(InputPaidMediaGroupError::NotEnoughItems(MIN_INPUT_GROUP_ITEMS));
+            return Err(InputPaidMediaGroupError::NotEnoughItems(
+                MIN_INPUT_GROUP_ITEMS,
+            ));
         }
         if total_items > MAX_INPUT_GROUP_ITEMS {
-            return Err(InputPaidMediaGroupError::TooManyItems(MAX_INPUT_GROUP_ITEMS));
+            return Err(InputPaidMediaGroupError::TooManyItems(
+                MAX_INPUT_GROUP_ITEMS,
+            ));
         }
 
         let mut form = Form::default();
@@ -410,9 +402,11 @@ impl InputPaidMediaGroup {
                 .map(|thumbnail| add_file(format!("tgbot_ipm_thumb_{}", idx), thumbnail));
             let data = match item.item_type {
                 InputPaidMediaGroupItemType::Photo => InputPaidMediaGroupItemData::Photo { media },
-                InputPaidMediaGroupItemType::Video(info) => {
-                    InputPaidMediaGroupItemData::Video { media, thumbnail, info }
-                }
+                InputPaidMediaGroupItemType::Video(info) => InputPaidMediaGroupItemData::Video {
+                    media,
+                    thumbnail,
+                    info,
+                },
             };
             info.push(data);
         }

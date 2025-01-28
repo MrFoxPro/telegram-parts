@@ -1,11 +1,8 @@
-use serde::Serialize;
-
 use crate::{
     api::{Method, Payload},
     types::{ChatId, Integer},
 };
-
-
+use serde::Serialize;
 
 /// Adds a message to a list of pinned messages in a chat.
 ///
@@ -14,12 +11,12 @@ use crate::{
 /// admin right in a supergroup or `can_edit_messages` admin right in a channel.
 #[derive(Clone, Debug, Serialize)]
 pub struct PinChatMessage {
-    chat_id: ChatId,
-    message_id: Integer,
+    pub chat_id: ChatId,
+    pub message_id: Integer,
     #[serde(skip_serializing_if = "Option::is_none")]
-    business_connection_id: Option<String>,
+    pub business_connection_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    disable_notification: Option<bool>,
+    pub disable_notification: Option<bool>,
 }
 
 impl PinChatMessage {
@@ -82,11 +79,11 @@ impl Method for PinChatMessage {
 /// admin right in a supergroup or `can_edit_messages` admin right in a channel.
 #[derive(Clone, Debug, Serialize)]
 pub struct UnpinChatMessage {
-    chat_id: ChatId,
+    pub chat_id: ChatId,
     #[serde(skip_serializing_if = "Option::is_none")]
-    business_connection_id: Option<String>,
+    pub business_connection_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_id: Option<Integer>,
+    pub message_id: Option<Integer>,
 }
 
 impl UnpinChatMessage {
@@ -148,7 +145,7 @@ impl Method for UnpinChatMessage {
 /// admin right in a supergroup or `can_edit_messages` admin right in a channel.
 #[derive(Clone, Debug, Serialize)]
 pub struct UnpinAllChatMessages {
-    chat_id: ChatId,
+    pub chat_id: ChatId,
 }
 
 impl UnpinAllChatMessages {

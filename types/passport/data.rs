@@ -1,8 +1,5 @@
 use serde::{Deserialize, Serialize};
-
 use crate::types::Integer;
-
-
 
 /// Represents a file uploaded to Telegram Passport.
 ///

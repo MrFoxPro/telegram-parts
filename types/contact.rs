@@ -1,11 +1,8 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{ChatId, Integer, Message, ReplyMarkup, ReplyParameters},
 };
-
-
 
 /// Represents a phone contact.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -86,27 +83,27 @@ impl Contact {
 /// Sends a phone contact.
 #[derive(Clone, Debug, Serialize)]
 pub struct SendContact {
-    chat_id: ChatId,
-    first_name: String,
-    phone_number: String,
+    pub chat_id: ChatId,
+    pub first_name: String,
+    pub phone_number: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    business_connection_id: Option<String>,
+    pub business_connection_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    disable_notification: Option<bool>,
+    pub disable_notification: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    last_name: Option<String>,
+    pub last_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_effect_id: Option<String>,
+    pub message_effect_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_thread_id: Option<Integer>,
+    pub message_thread_id: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    protect_content: Option<bool>,
+    pub protect_content: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<ReplyMarkup>,
+    pub reply_markup: Option<ReplyMarkup>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_parameters: Option<ReplyParameters>,
+    pub reply_parameters: Option<ReplyParameters>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    vcard: Option<String>,
+    pub vcard: Option<String>,
 }
 
 impl SendContact {

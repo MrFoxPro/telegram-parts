@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Value as JsonValue;
-
 use self::raw::*;
 use crate::types::{
     Animation,
@@ -36,8 +35,6 @@ use crate::types::{
     Voice,
     WebAppData,
 };
-
-
 
 mod raw;
 

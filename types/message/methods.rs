@@ -1,5 +1,4 @@
 use serde::Serialize;
-
 use crate::{
     api::{Form, Method, Payload},
     types::{
@@ -21,8 +20,6 @@ use crate::{
     },
 };
 
-
-
 /// Copies a message.
 ///
 /// Service messages, paid media messages, giveaway messages, giveaway winners messages,
@@ -32,27 +29,27 @@ use crate::{
 /// but the copied message doesn't have a link to the original message.
 #[derive(Clone, Debug, Serialize)]
 pub struct CopyMessage {
-    chat_id: ChatId,
-    from_chat_id: ChatId,
-    message_id: Integer,
+    pub chat_id: ChatId,
+    pub from_chat_id: ChatId,
+    pub message_id: Integer,
     #[serde(skip_serializing_if = "Option::is_none")]
-    caption: Option<String>,
+    pub caption: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    caption_entities: Option<TextEntities>,
+    pub caption_entities: Option<TextEntities>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    disable_notification: Option<bool>,
+    pub disable_notification: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_thread_id: Option<Integer>,
+    pub message_thread_id: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    parse_mode: Option<ParseMode>,
+    pub parse_mode: Option<ParseMode>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    protect_content: Option<bool>,
+    pub protect_content: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<ReplyMarkup>,
+    pub reply_markup: Option<ReplyMarkup>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_parameters: Option<ReplyParameters>,
+    pub reply_parameters: Option<ReplyParameters>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    show_caption_above_media: Option<bool>,
+    pub show_caption_above_media: Option<bool>,
 }
 
 impl CopyMessage {
@@ -215,17 +212,17 @@ impl Method for CopyMessage {
 /// Album grouping is kept for copied messages.
 #[derive(Clone, Debug, Serialize)]
 pub struct CopyMessages {
-    chat_id: ChatId,
-    from_chat_id: ChatId,
-    message_ids: Vec<Integer>,
+    pub chat_id: ChatId,
+    pub from_chat_id: ChatId,
+    pub message_ids: Vec<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    disable_notification: Option<bool>,
+    pub disable_notification: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_thread_id: Option<Integer>,
+    pub message_thread_id: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    protect_content: Option<bool>,
+    pub protect_content: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    remove_caption: Option<bool>,
+    pub remove_caption: Option<bool>,
 }
 
 impl CopyMessages {
@@ -321,8 +318,8 @@ impl Method for CopyMessages {
 ///   it can delete any message there.
 #[derive(Clone, Debug, Serialize)]
 pub struct DeleteMessage {
-    chat_id: ChatId,
-    message_id: Integer,
+    pub chat_id: ChatId,
+    pub message_id: Integer,
 }
 
 impl DeleteMessage {
@@ -358,8 +355,8 @@ impl Method for DeleteMessage {
 /// See [`DeleteMessage`] for limitations on which messages can be deleted.
 #[derive(Clone, Debug, Serialize)]
 pub struct DeleteMessages {
-    chat_id: ChatId,
-    message_ids: Vec<Integer>,
+    pub chat_id: ChatId,
+    pub message_ids: Vec<Integer>,
 }
 
 impl DeleteMessages {
@@ -393,23 +390,23 @@ impl Method for DeleteMessages {
 #[derive(Clone, Debug, Serialize)]
 pub struct EditMessageCaption {
     #[serde(skip_serializing_if = "Option::is_none")]
-    business_connection_id: Option<String>,
+    pub business_connection_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    caption: Option<String>,
+    pub caption: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    caption_entities: Option<TextEntities>,
+    pub caption_entities: Option<TextEntities>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    chat_id: Option<ChatId>,
+    pub chat_id: Option<ChatId>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    inline_message_id: Option<String>,
+    pub inline_message_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_id: Option<Integer>,
+    pub message_id: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    parse_mode: Option<ParseMode>,
+    pub parse_mode: Option<ParseMode>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<InlineKeyboardMarkup>,
+    pub reply_markup: Option<InlineKeyboardMarkup>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    show_caption_above_media: Option<bool>,
+    pub show_caption_above_media: Option<bool>,
 }
 
 impl EditMessageCaption {
@@ -552,26 +549,26 @@ impl Method for EditMessageCaption {
 /// is explicitly disabled by a call to [`StopMessageLiveLocation`].
 #[derive(Clone, Debug, Serialize)]
 pub struct EditMessageLiveLocation {
-    latitude: Float,
-    longitude: Float,
+    pub latitude: Float,
+    pub longitude: Float,
     #[serde(skip_serializing_if = "Option::is_none")]
-    business_connection_id: Option<String>,
+    pub business_connection_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    chat_id: Option<ChatId>,
+    pub chat_id: Option<ChatId>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    heading: Option<Integer>,
+    pub heading: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    horizontal_accuracy: Option<Float>,
+    pub horizontal_accuracy: Option<Float>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    inline_message_id: Option<String>,
+    pub inline_message_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    live_period: Option<Integer>,
+    pub live_period: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_id: Option<Integer>,
+    pub message_id: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    proximity_alert_radius: Option<Integer>,
+    pub proximity_alert_radius: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<InlineKeyboardMarkup>,
+    pub reply_markup: Option<InlineKeyboardMarkup>,
 }
 
 impl EditMessageLiveLocation {
@@ -718,7 +715,7 @@ impl Method for EditMessageLiveLocation {
 /// use a previously uploaded file via its file_id or specify a URL.
 #[derive(Debug)]
 pub struct EditMessageMedia {
-    form: Form,
+    pub form: Form,
 }
 
 impl EditMessageMedia {
@@ -794,15 +791,15 @@ impl Method for EditMessageMedia {
 #[derive(Clone, Debug, Serialize)]
 pub struct EditMessageReplyMarkup {
     #[serde(skip_serializing_if = "Option::is_none")]
-    business_connection_id: Option<String>,
+    pub business_connection_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    chat_id: Option<ChatId>,
+    pub chat_id: Option<ChatId>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    inline_message_id: Option<String>,
+    pub inline_message_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_id: Option<Integer>,
+    pub message_id: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<InlineKeyboardMarkup>,
+    pub reply_markup: Option<InlineKeyboardMarkup>,
 }
 
 impl EditMessageReplyMarkup {
@@ -881,23 +878,23 @@ impl Method for EditMessageReplyMarkup {
 /// Changes a text or a game message.
 #[derive(Clone, Debug, Serialize)]
 pub struct EditMessageText {
-    text: String,
+    pub text: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    business_connection_id: Option<String>,
+    pub business_connection_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    chat_id: Option<ChatId>,
+    pub chat_id: Option<ChatId>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    entities: Option<TextEntities>,
+    pub entities: Option<TextEntities>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    link_preview_options: Option<LinkPreviewOptions>,
+    pub link_preview_options: Option<LinkPreviewOptions>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    inline_message_id: Option<String>,
+    pub inline_message_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_id: Option<Integer>,
+    pub message_id: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    parse_mode: Option<ParseMode>,
+    pub parse_mode: Option<ParseMode>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<InlineKeyboardMarkup>,
+    pub reply_markup: Option<InlineKeyboardMarkup>,
 }
 
 impl EditMessageText {
@@ -1027,15 +1024,15 @@ impl Method for EditMessageText {
 /// Forwards a message.
 #[derive(Clone, Debug, Serialize)]
 pub struct ForwardMessage {
-    chat_id: ChatId,
-    from_chat_id: ChatId,
-    message_id: Integer,
+    pub chat_id: ChatId,
+    pub from_chat_id: ChatId,
+    pub message_id: Integer,
     #[serde(skip_serializing_if = "Option::is_none")]
-    disable_notification: Option<bool>,
+    pub disable_notification: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    protect_content: Option<bool>,
+    pub protect_content: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_thread_id: Option<Integer>,
+    pub message_thread_id: Option<Integer>,
 }
 
 impl ForwardMessage {
@@ -1110,15 +1107,15 @@ impl Method for ForwardMessage {
 /// Album grouping is kept for forwarded messages.
 #[derive(Clone, Debug, Serialize)]
 pub struct ForwardMessages {
-    chat_id: ChatId,
-    from_chat_id: ChatId,
+    pub chat_id: ChatId,
+    pub from_chat_id: ChatId,
     message_ids: Vec<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    disable_notification: Option<bool>,
+    pub disable_notification: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    protect_content: Option<bool>,
+    pub protect_content: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_thread_id: Option<Integer>,
+    pub message_thread_id: Option<Integer>,
 }
 
 impl ForwardMessages {
@@ -1191,28 +1188,28 @@ impl Method for ForwardMessages {
 /// Sends a text message.
 #[derive(Clone, Debug, Serialize)]
 pub struct SendMessage {
-    chat_id: ChatId,
-    text: String,
+    pub chat_id: ChatId,
+    pub text: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    business_connection_id: Option<String>,
+    pub business_connection_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    disable_notification: Option<bool>,
+    pub disable_notification: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    entities: Option<TextEntities>,
+    pub entities: Option<TextEntities>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    link_preview_options: Option<LinkPreviewOptions>,
+    pub link_preview_options: Option<LinkPreviewOptions>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_effect_id: Option<String>,
+    pub message_effect_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_thread_id: Option<Integer>,
+    pub message_thread_id: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    parse_mode: Option<ParseMode>,
+    pub parse_mode: Option<ParseMode>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    protect_content: Option<bool>,
+    pub protect_content: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<ReplyMarkup>,
+    pub reply_markup: Option<ReplyMarkup>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_parameters: Option<ReplyParameters>,
+    pub reply_parameters: Option<ReplyParameters>,
 }
 
 impl SendMessage {
@@ -1377,15 +1374,15 @@ impl Method for SendMessage {
 #[derive(Clone, Debug, Serialize)]
 pub struct StopMessageLiveLocation {
     #[serde(skip_serializing_if = "Option::is_none")]
-    business_connection_id: Option<String>,
+    pub business_connection_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    chat_id: Option<ChatId>,
+    pub chat_id: Option<ChatId>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    inline_message_id: Option<String>,
+    pub inline_message_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_id: Option<Integer>,
+    pub message_id: Option<Integer>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<InlineKeyboardMarkup>,
+    pub reply_markup: Option<InlineKeyboardMarkup>,
 }
 
 impl StopMessageLiveLocation {

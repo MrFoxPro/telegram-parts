@@ -1,22 +1,11 @@
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
-
 use crate::{
     api::{Method, Payload},
     types::{
-        Animation,
-        EditMessageResult,
-        InlineKeyboardMarkup,
-        Integer,
-        Message,
-        PhotoSize,
-        ReplyParameters,
-        Text,
-        TextEntities,
-        User,
+        Animation, EditMessageResult, InlineKeyboardMarkup, Integer, Message, PhotoSize,
+        ReplyParameters, Text, TextEntities, User,
     },
 };
-
-
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 /// Represents a Game.
 ///
@@ -150,7 +139,11 @@ impl GameHighScore {
     /// * `score` - Score achieved by the user.
     /// * `user` - User associated with the high score.
     pub fn new(position: Integer, score: Integer, user: User) -> Self {
-        Self { position, score, user }
+        Self {
+            position,
+            score,
+            user,
+        }
     }
 }
 
@@ -381,7 +374,12 @@ impl SetGameScore {
     /// * `message_id` - Identifier of the sent message.
     /// * `user_id` - User identifier.
     /// * `score` - New score, must be non-negative.
-    pub fn for_chat_message(chat_id: Integer, message_id: Integer, user_id: Integer, score: Integer) -> Self {
+    pub fn for_chat_message(
+        chat_id: Integer,
+        message_id: Integer,
+        user_id: Integer,
+        score: Integer,
+    ) -> Self {
         Self {
             user_id,
             score,

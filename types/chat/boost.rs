@@ -1,11 +1,8 @@
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
-
 use crate::{
     api::{Method, Payload},
     types::{Chat, ChatId, Integer, User},
 };
-
-
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 /// Contains information about a chat boost.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -31,7 +28,12 @@ impl ChatBoost {
     /// * `expiration_date` - Point in time (Unix timestamp) when the boost will automatically expire,
     ///                       unless the booster's Telegram Premium subscription is prolonged.
     /// * `source` - Source of the added boost.
-    pub fn new<T>(add_date: Integer, boost_id: T, expiration_date: Integer, source: ChatBoostSource) -> Self
+    pub fn new<T>(
+        add_date: Integer,
+        boost_id: T,
+        expiration_date: Integer,
+        source: ChatBoostSource,
+    ) -> Self
     where
         T: Into<String>,
     {
@@ -123,7 +125,10 @@ impl ChatBoostSourceUser {
     where
         S: Serializer,
     {
-        Self { user: value.clone() }.serialize(serializer)
+        Self {
+            user: value.clone(),
+        }
+        .serialize(serializer)
     }
 }
 

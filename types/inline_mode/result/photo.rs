@@ -1,14 +1,12 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
-use crate::types::{InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity};
-
-
+use crate::types::{
+    InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity,
+};
+use serde::{Deserialize, Serialize};
 
 /// Represents a link to a photo.
 ///
@@ -372,7 +370,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultPhoto {
             photo_url: value.data.photo_url.ok_or(MissingField("photo_url"))?,
             reply_markup: value.data.reply_markup,
             show_caption_above_media: value.data.show_caption_above_media,
-            thumbnail_url: value.data.thumbnail_url.ok_or(MissingField("thumbnail_url"))?,
+            thumbnail_url: value
+                .data
+                .thumbnail_url
+                .ok_or(MissingField("thumbnail_url"))?,
             title: value.data.title,
         })
     }
@@ -413,7 +414,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultCachedPhoto {
             id: value.id,
             input_message_content: value.data.input_message_content,
             parse_mode: value.data.parse_mode,
-            photo_file_id: value.data.photo_file_id.ok_or(MissingField("photo_file_id"))?,
+            photo_file_id: value
+                .data
+                .photo_file_id
+                .ok_or(MissingField("photo_file_id"))?,
             title: value.data.title,
             reply_markup: value.data.reply_markup,
             show_caption_above_media: value.data.show_caption_above_media,

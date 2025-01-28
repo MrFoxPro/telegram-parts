@@ -1,13 +1,9 @@
 use std::{error::Error, fmt};
-
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{ChatAdministratorRights, ChatId, Integer},
 };
-
-
 
 /// Represents information about a bot returned in [`GetBot`].
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -155,7 +151,9 @@ impl BotCommand {
         let description_len = description.len();
         if !(Self::MIN_NAME_LEN..=Self::MAX_NAME_LEN).contains(&name_len) {
             Err(BotCommandError::BadNameLen(name_len))
-        } else if !(Self::MIN_DESCRIPTION_LEN..=Self::MAX_DESCRIPTION_LEN).contains(&description_len) {
+        } else if !(Self::MIN_DESCRIPTION_LEN..=Self::MAX_DESCRIPTION_LEN)
+            .contains(&description_len)
+        {
             Err(BotCommandError::BadDescriptionLen(description_len))
         } else {
             Ok(Self { name, description })
@@ -276,7 +274,9 @@ impl BotCommandScope {
     where
         T: Into<ChatId>,
     {
-        Self::Chat { chat_id: value.into() }
+        Self::Chat {
+            chat_id: value.into(),
+        }
     }
 
     /// Creates a new `BotCommandScope` covering all administrators
@@ -289,7 +289,9 @@ impl BotCommandScope {
     where
         T: Into<ChatId>,
     {
-        Self::ChatAdministrators { chat_id: value.into() }
+        Self::ChatAdministrators {
+            chat_id: value.into(),
+        }
     }
 
     /// Creates a new `BotCommandScope` covering a specific member of a group or supergroup chat.
@@ -399,9 +401,9 @@ impl Method for Close {
 #[derive(Clone, Debug, Default, Serialize)]
 pub struct DeleteBotCommands {
     #[serde(skip_serializing_if = "Option::is_none")]
-    language_code: Option<String>,
+    pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    scope: Option<BotCommandScope>,
+    pub scope: Option<BotCommandScope>,
 }
 
 impl DeleteBotCommands {
@@ -453,9 +455,9 @@ impl Method for GetBot {
 #[derive(Clone, Debug, Default, Serialize)]
 pub struct GetBotCommands {
     #[serde(skip_serializing_if = "Option::is_none")]
-    language_code: Option<String>,
+    pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    scope: Option<BotCommandScope>,
+    pub scope: Option<BotCommandScope>,
 }
 
 impl GetBotCommands {
@@ -495,7 +497,7 @@ impl Method for GetBotCommands {
 #[derive(Clone, Copy, Debug, Default, Serialize)]
 pub struct GetBotDefaultAdministratorRights {
     #[serde(skip_serializing_if = "Option::is_none")]
-    for_channels: Option<bool>,
+    pub for_channels: Option<bool>,
 }
 
 impl GetBotDefaultAdministratorRights {

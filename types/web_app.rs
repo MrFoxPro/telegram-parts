@@ -1,8 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-
-
-/// Represents a [Web App](https://core.telegram.org/bots/webapps).
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
 pub struct WebAppInfo {
     /// An HTTPS URL of a Web App to be opened

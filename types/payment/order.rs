@@ -1,8 +1,5 @@
 use serde::{Deserialize, Serialize};
-
 use crate::types::ShippingAddress;
-
-
 
 /// Represents an order.
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, PartialOrd, Serialize)]

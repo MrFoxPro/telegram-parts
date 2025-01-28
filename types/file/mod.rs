@@ -1,17 +1,13 @@
-use std::fmt;
-
-use mime::Mime;
-use serde::{Deserialize, Serialize};
-use tokio::io::AsyncRead;
-use tokio_util::codec::{BytesCodec, FramedRead};
-
 pub use self::{animation::*, audio::*, document::*, photo::*, video::*, video_note::*, voice::*};
 use crate::{
     api::{FormValue, Method, Payload},
     types::Integer,
 };
-
-
+use mime::Mime;
+use serde::{Deserialize, Serialize};
+use std::fmt;
+use tokio::io::AsyncRead;
+use tokio_util::codec::{BytesCodec, FramedRead};
 
 mod animation;
 mod audio;

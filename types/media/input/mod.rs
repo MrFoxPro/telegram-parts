@@ -1,12 +1,8 @@
-use std::{error::Error, fmt};
-
-use serde::{Deserialize, Serialize};
-use serde_json::Error as JsonError;
-
 pub use self::{animation::*, audio::*, document::*, photo::*, video::*};
 use crate::{api::Form, types::InputFile};
-
-
+use serde::{Deserialize, Serialize};
+use serde_json::Error as JsonError;
+use std::{error::Error, fmt};
 
 mod animation;
 mod audio;
@@ -44,7 +40,11 @@ impl InputMedia {
     /// * `thumbnail` - Thumbnail file.
     ///
     /// Note that photo can not have a thumbnail.
-    pub fn with_thumbnail<A, B, C>(file: A, media_type: B, thumbnail: C) -> Result<InputMedia, InputMediaError>
+    pub fn with_thumbnail<A, B, C>(
+        file: A,
+        media_type: B,
+        thumbnail: C,
+    ) -> Result<InputMedia, InputMediaError>
     where
         A: Into<InputFile>,
         B: Into<InputMediaType>,
@@ -53,7 +53,11 @@ impl InputMedia {
         Self::create(file, media_type, Some(thumbnail))
     }
 
-    fn create<A, B, C>(media: A, media_type: B, thumbnail: Option<C>) -> Result<Self, InputMediaError>
+    fn create<A, B, C>(
+        media: A,
+        media_type: B,
+        thumbnail: Option<C>,
+    ) -> Result<Self, InputMediaError>
     where
         A: Into<InputFile>,
         B: Into<InputMediaType>,
@@ -74,11 +78,27 @@ impl InputMedia {
         let media = add_file(&mut form, "tgbot_im_file", media.into());
         let thumbnail = thumbnail.map(|thumb| add_file(&mut form, "tgbot_im_thumb", thumb.into()));
         let data = match media_type.into() {
-            InputMediaType::Animation(info) => InputMediaData::Animation { media, thumbnail, info },
-            InputMediaType::Audio(info) => InputMediaData::Audio { media, thumbnail, info },
-            InputMediaType::Document(info) => InputMediaData::Document { media, thumbnail, info },
+            InputMediaType::Animation(info) => InputMediaData::Animation {
+                media,
+                thumbnail,
+                info,
+            },
+            InputMediaType::Audio(info) => InputMediaData::Audio {
+                media,
+                thumbnail,
+                info,
+            },
+            InputMediaType::Document(info) => InputMediaData::Document {
+                media,
+                thumbnail,
+                info,
+            },
             InputMediaType::Photo(info) => InputMediaData::Photo { media, info },
-            InputMediaType::Video(info) => InputMediaData::Video { media, thumbnail, info },
+            InputMediaType::Video(info) => InputMediaData::Video {
+                media,
+                thumbnail,
+                info,
+            },
         };
         let info = serde_json::to_string(&data).map_err(InputMediaError::SerializeInfo)?;
         form.insert_field("media", info);
@@ -164,7 +184,9 @@ impl Error for InputMediaError {
 impl fmt::Display for InputMediaError {
     fn fmt(&self, out: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            InputMediaError::SerializeInfo(err) => write!(out, "failed to serialize input media info: {}", err),
+            InputMediaError::SerializeInfo(err) => {
+                write!(out, "failed to serialize input media info: {}", err)
+            }
         }
     }
 }

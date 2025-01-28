@@ -1,11 +1,8 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::{Integer, OrderInfo, User},
 };
-
-
 
 /// Represents an incoming pre-checkout query.
 #[derive(Clone, Debug, Deserialize, PartialOrd, PartialEq, Serialize)]
@@ -44,7 +41,13 @@ impl PreCheckoutQuery {
     /// * `id` - Unique query identifier.
     /// * `invoice_payload` - Bot specified invoice payload.
     /// * `total_amount` - Total price in the smallest units of the currency.
-    pub fn new<A, B, C>(currency: A, from: User, id: B, invoice_payload: C, total_amount: Integer) -> Self
+    pub fn new<A, B, C>(
+        currency: A,
+        from: User,
+        id: B,
+        invoice_payload: C,
+        total_amount: Integer,
+    ) -> Self
     where
         A: Into<String>,
         B: Into<String>,

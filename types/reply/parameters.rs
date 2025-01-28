@@ -1,11 +1,7 @@
 use std::{error::Error, fmt};
-
 use serde::{Deserialize, Serialize};
 use serde_json::Error as JsonError;
-
 use crate::types::{ChatId, Integer, ParseMode, TextEntities, TextEntity};
-
-
 
 /// Describes reply parameters for the message that is being sent.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -160,7 +156,9 @@ impl Error for ReplyParametersError {
 impl fmt::Display for ReplyParametersError {
     fn fmt(&self, out: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            ReplyParametersError::Serialize(err) => write!(out, "can not serialize reply parameters: {}", err),
+            ReplyParametersError::Serialize(err) => {
+                write!(out, "can not serialize reply parameters: {}", err)
+            }
         }
     }
 }

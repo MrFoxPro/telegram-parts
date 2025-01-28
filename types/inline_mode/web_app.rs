@@ -1,11 +1,8 @@
-use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Method, Payload},
     types::InlineQueryResult,
 };
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents an inline message sent by a Web App on behalf of a user
 #[derive(Clone, Default, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]

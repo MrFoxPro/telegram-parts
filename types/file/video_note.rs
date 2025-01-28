@@ -1,23 +1,12 @@
-use std::{error::Error, fmt};
-
-use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Form, Method, Payload},
     types::{
-        ChatId,
-        InputFile,
-        Integer,
-        Message,
-        PhotoSize,
-        ReplyMarkup,
-        ReplyMarkupError,
-        ReplyParameters,
-        ReplyParametersError,
+        ChatId, InputFile, Integer, Message, PhotoSize, ReplyMarkup, ReplyMarkupError,
+        ReplyParameters, ReplyParametersError,
     },
 };
-
-
+use serde::{Deserialize, Serialize};
+use std::{error::Error, fmt};
 
 /// Represents a video message.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -125,7 +114,8 @@ impl SendVideoNote {
     where
         T: Into<String>,
     {
-        self.form.insert_field("business_connection_id", value.into());
+        self.form
+            .insert_field("business_connection_id", value.into());
         self
     }
 
@@ -214,8 +204,12 @@ impl SendVideoNote {
     /// # Arguments
     ///
     /// * `value` - Description of the message to reply to.
-    pub fn with_reply_parameters(mut self, value: ReplyParameters) -> Result<Self, ReplyParametersError> {
-        self.form.insert_field("reply_parameters", value.serialize()?);
+    pub fn with_reply_parameters(
+        mut self,
+        value: ReplyParameters,
+    ) -> Result<Self, ReplyParametersError> {
+        self.form
+            .insert_field("reply_parameters", value.serialize()?);
         Ok(self)
     }
 
@@ -260,7 +254,10 @@ pub enum SendVideoNoteError {
 impl fmt::Display for SendVideoNoteError {
     fn fmt(&self, out: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::InvalidThumbnail => write!(out, "thumbnails can’t be reused and can be only uploaded as a new file"),
+            Self::InvalidThumbnail => write!(
+                out,
+                "thumbnails can’t be reused and can be only uploaded as a new file"
+            ),
         }
     }
 }

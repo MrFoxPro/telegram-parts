@@ -1,8 +1,5 @@
 use std::fmt;
-
 use serde::{Deserialize, Serialize};
-
-
 
 const ESCAPE_MARKDOWN: [char; 4] = ['_', '*', '`', '['];
 const ESCAPE_MARKDOWN_V2: [char; 18] = [

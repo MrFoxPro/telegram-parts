@@ -1,12 +1,9 @@
-use serde::{Deserialize, Serialize};
-use serde_json::Error as JsonError;
-
 use crate::{
     api::{Method, Payload},
     types::{ChatId, InlineKeyboardMarkup, Integer, Message, ReplyParameters},
 };
-
-
+use serde::{Deserialize, Serialize};
+use serde_json::Error as JsonError;
 
 /// Represents an invoice.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -39,7 +36,13 @@ impl Invoice {
     /// * `start_parameter` - Unique bot deep-linking parameter.
     /// * `title` - Product name.
     /// * `total_amount` - Total price.
-    pub fn new<A, B, C, D>(currency: A, description: B, start_parameter: C, title: D, total_amount: Integer) -> Self
+    pub fn new<A, B, C, D>(
+        currency: A,
+        description: B,
+        start_parameter: C,
+        title: D,
+        total_amount: Integer,
+    ) -> Self
     where
         A: Into<String>,
         B: Into<String>,
@@ -430,7 +433,14 @@ impl SendInvoice {
     /// * `currency` - Three-letter ISO 4217 currency code, see more on currencies.
     /// * `prices` - Price breakdown, a list of components
     ///              (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.).
-    pub fn new<A, B, C, D, E, F>(chat_id: A, title: B, description: C, payload: D, currency: E, prices: F) -> Self
+    pub fn new<A, B, C, D, E, F>(
+        chat_id: A,
+        title: B,
+        description: C,
+        payload: D,
+        currency: E,
+        prices: F,
+    ) -> Self
     where
         A: Into<ChatId>,
         B: Into<String>,

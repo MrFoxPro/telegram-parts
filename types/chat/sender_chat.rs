@@ -1,11 +1,8 @@
-use serde::Serialize;
-
 use crate::{
     api::{Method, Payload},
     types::{ChatId, Integer},
 };
-
-
+use serde::Serialize;
 
 /// Bans a channel chat in a supergroup or a channel.
 ///

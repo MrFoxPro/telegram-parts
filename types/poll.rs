@@ -1,24 +1,11 @@
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
-
 use crate::{
     api::{Method, Payload},
     types::{
-        Chat,
-        ChatId,
-        InlineKeyboardMarkup,
-        Integer,
-        Message,
-        ParseMode,
-        ReplyMarkup,
-        ReplyParameters,
-        Text,
-        TextEntities,
-        TextEntity,
-        User,
+        Chat, ChatId, InlineKeyboardMarkup, Integer, Message, ParseMode, ReplyMarkup,
+        ReplyParameters, Text, TextEntities, TextEntity, User,
     },
 };
-
-
 
 /// Represents a poll.
 #[derive(Clone, Debug, derive_more::From, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -676,7 +663,8 @@ impl SendQuiz {
         C: IntoIterator<Item = D>,
         D: Into<InputPollOption>,
     {
-        let mut parameters = PollParameters::new(chat_id.into(), question.into(), PollType::Quiz, options);
+        let mut parameters =
+            PollParameters::new(chat_id.into(), question.into(), PollType::Quiz, options);
         parameters.correct_option_id = Some(correct_option_id);
         Self { inner: parameters }
     }

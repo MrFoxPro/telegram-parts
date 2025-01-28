@@ -1,14 +1,10 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
 use crate::types::InlineKeyboardMarkup;
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a game.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -57,7 +53,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultGame {
 
     fn try_from(value: RawInlineQueryResult) -> Result<Self, Self::Error> {
         Ok(Self {
-            game_short_name: value.data.game_short_name.ok_or(MissingField("game_short_name"))?,
+            game_short_name: value
+                .data
+                .game_short_name
+                .ok_or(MissingField("game_short_name"))?,
             id: value.id,
             reply_markup: value.data.reply_markup,
         })

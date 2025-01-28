@@ -1,26 +1,12 @@
-use serde::{Deserialize, Serialize};
-
 pub use self::{
-    action::*,
-    boost::*,
-    full_info::*,
-    id::*,
-    invite_link::*,
-    join_request::*,
-    location::*,
-    member::*,
-    message::*,
-    permissions::*,
-    photo::*,
-    sender_chat::*,
-    sticker_set::*,
+    action::*, boost::*, full_info::*, id::*, invite_link::*, join_request::*, location::*,
+    member::*, message::*, permissions::*, photo::*, sender_chat::*, sticker_set::*,
 };
 use crate::{
     api::{Method, Payload},
     types::BackgroundType,
 };
-
-
+use serde::{Deserialize, Serialize};
 
 mod action;
 mod boost;
@@ -277,7 +263,9 @@ pub struct ChatBackground {
 
 impl From<BackgroundType> for ChatBackground {
     fn from(value: BackgroundType) -> Self {
-        Self { background_type: value }
+        Self {
+            background_type: value,
+        }
     }
 }
 

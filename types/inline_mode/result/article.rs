@@ -1,14 +1,10 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
 use crate::types::{InlineKeyboardMarkup, InputMessageContent, Integer};
-
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a link to an article or a web page.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -149,7 +145,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultArticle {
             description: value.data.description,
             hide_url: value.data.hide_url,
             id: value.id,
-            input_message_content: value.data.input_message_content.ok_or(MissingField("content"))?,
+            input_message_content: value
+                .data
+                .input_message_content
+                .ok_or(MissingField("content"))?,
             reply_markup: value.data.reply_markup,
             thumbnail_url: value.data.thumbnail_url,
             thumbnail_width: value.data.thumbnail_width,

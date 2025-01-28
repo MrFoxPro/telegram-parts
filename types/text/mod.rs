@@ -1,10 +1,6 @@
 use std::str::EncodeUtf16;
-
 use serde::{Deserialize, Serialize};
-
 pub use self::entities::*;
-
-
 
 mod entities;
 
@@ -43,7 +39,11 @@ impl Text {
                             let len = parts.len();
                             assert!(len >= 1);
                             let command = parts[0].to_string();
-                            let bot_name = if len == 2 { Some(parts[1].to_string()) } else { None };
+                            let bot_name = if len == 2 {
+                                Some(parts[1].to_string())
+                            } else {
+                                None
+                            };
                             Some(TextEntityBotCommand { command, bot_name })
                         } else {
                             None
@@ -106,6 +106,13 @@ impl<'a> From<&'a Text> for TextRepr<'a> {
 impl<'a> TextRepr<'a> {
     fn get_entity_content(&self, position: TextEntityPosition) -> String {
         let (offset, length) = (position.offset as usize, position.length as usize);
-        String::from_utf16_lossy(&self.iter.clone().skip(offset).take(length).collect::<Vec<u16>>())
+        String::from_utf16_lossy(
+            &self
+                .iter
+                .clone()
+                .skip(offset)
+                .take(length)
+                .collect::<Vec<u16>>(),
+        )
     }
 }

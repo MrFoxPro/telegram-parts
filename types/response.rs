@@ -1,10 +1,6 @@
-use std::{error::Error, fmt};
-
-use serde::Deserialize;
-
 use crate::types::{False, Integer, True};
-
-
+use serde::Deserialize;
+use std::{error::Error, fmt};
 
 /// Represents an API Response.
 #[derive(Clone, Debug, Deserialize)]
@@ -93,7 +89,11 @@ impl Error for ResponseError {}
 
 impl fmt::Display for ResponseError {
     fn fmt(&self, out: &mut fmt::Formatter) -> fmt::Result {
-        write!(out, "a telegram error has occurred: description={}", self.description)?;
+        write!(
+            out,
+            "a telegram error has occurred: description={}",
+            self.description
+        )?;
         if let Some(code) = self.error_code {
             write!(out, "; error_code={}", code)?;
         }

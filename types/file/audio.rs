@@ -1,27 +1,12 @@
-use std::{error::Error, fmt};
-
-use serde::{Deserialize, Serialize};
-
 use crate::{
     api::{Form, Method, Payload},
     types::{
-        ChatId,
-        InputFile,
-        Integer,
-        Message,
-        ParseMode,
-        PhotoSize,
-        ReplyMarkup,
-        ReplyMarkupError,
-        ReplyParameters,
-        ReplyParametersError,
-        TextEntities,
-        TextEntity,
-        TextEntityError,
+        ChatId, InputFile, Integer, Message, ParseMode, PhotoSize, ReplyMarkup, ReplyMarkupError,
+        ReplyParameters, ReplyParametersError, TextEntities, TextEntity, TextEntityError,
     },
 };
-
-
+use serde::{Deserialize, Serialize};
+use std::{error::Error, fmt};
 
 /// Represents an audio file to be treated as music by the Telegram clients.
 #[derive(Clone, Debug, Deserialize, PartialEq, PartialOrd, Serialize)]
@@ -179,7 +164,10 @@ impl SendAudio {
         A: Into<InputFile>,
     {
         Self {
-            form: Form::from([("chat_id", chat_id.into().into()), ("audio", audio.into().into())]),
+            form: Form::from([
+                ("chat_id", chat_id.into().into()),
+                ("audio", audio.into().into()),
+            ]),
         }
     }
 
@@ -192,7 +180,8 @@ impl SendAudio {
     where
         T: Into<String>,
     {
-        self.form.insert_field("business_connection_id", value.into());
+        self.form
+            .insert_field("business_connection_id", value.into());
         self
     }
 
@@ -221,7 +210,8 @@ impl SendAudio {
         T: IntoIterator<Item = TextEntity>,
     {
         let value: TextEntities = value.into_iter().collect();
-        self.form.insert_field("caption_entities", value.serialize()?);
+        self.form
+            .insert_field("caption_entities", value.serialize()?);
         self.form.remove_field("parse_mode");
         Ok(self)
     }
@@ -362,8 +352,12 @@ impl SendAudio {
     /// # Arguments
     ///
     /// * `value` - Description of the message to reply to.
-    pub fn with_reply_parameters(mut self, value: ReplyParameters) -> Result<Self, ReplyParametersError> {
-        self.form.insert_field("reply_parameters", value.serialize()?);
+    pub fn with_reply_parameters(
+        mut self,
+        value: ReplyParameters,
+    ) -> Result<Self, ReplyParametersError> {
+        self.form
+            .insert_field("reply_parameters", value.serialize()?);
         Ok(self)
     }
 }
@@ -386,7 +380,10 @@ pub enum SendAudioError {
 impl fmt::Display for SendAudioError {
     fn fmt(&self, out: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::InvalidThumbnail => write!(out, "thumbnails can’t be reused and can be only uploaded as a new file"),
+            Self::InvalidThumbnail => write!(
+                out,
+                "thumbnails can’t be reused and can be only uploaded as a new file"
+            ),
         }
     }
 }

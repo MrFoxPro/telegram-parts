@@ -1,14 +1,12 @@
-use serde::{Deserialize, Serialize};
-
 use super::raw::{
-    RawInlineQueryResult,
-    RawInlineQueryResultData,
+    RawInlineQueryResult, RawInlineQueryResultData,
     RawInlineQueryResultDataError::{self, MissingField},
     RawInlineQueryResultType,
 };
-use crate::types::{InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity};
-
-
+use crate::types::{
+    InlineKeyboardMarkup, InputMessageContent, Integer, ParseMode, TextEntities, TextEntity,
+};
+use serde::{Deserialize, Serialize};
 
 /// Represents a link to an mp3 audio file.
 ///
@@ -314,7 +312,10 @@ impl TryFrom<RawInlineQueryResult> for InlineQueryResultCachedAudio {
 
     fn try_from(value: RawInlineQueryResult) -> Result<Self, Self::Error> {
         Ok(Self {
-            audio_file_id: value.data.audio_file_id.ok_or(MissingField("audio_file_id"))?,
+            audio_file_id: value
+                .data
+                .audio_file_id
+                .ok_or(MissingField("audio_file_id"))?,
             caption: value.data.caption,
             caption_entities: value.data.caption_entities,
             id: value.id,

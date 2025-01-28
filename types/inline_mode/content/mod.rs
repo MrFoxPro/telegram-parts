@@ -1,15 +1,12 @@
-use serde::{Deserialize, Serialize};
-
 pub use self::{contact::*, invoice::*, location::*, text::*, venue::*};
 use crate::types::{Contact, Location, Text, Venue};
+use serde::{Deserialize, Serialize};
 
 mod contact;
 mod invoice;
 mod location;
 mod text;
 mod venue;
-
-
 
 /// Represents a content of a message to be sent as a result of an inline query.
 #[derive(Clone, Debug, derive_more::From, Deserialize, PartialEq, PartialOrd, Serialize)]
